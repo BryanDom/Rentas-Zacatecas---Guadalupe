@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    Sistema de consultas de propiedades en renta en Zacatecas y Guadalupe
+{% endblock titulo %}
+
+{% block contenido %}
+<div class="container container-fluid">
+    <div class="container">
+        <div class="text-center" style="margin-top: 5px;">
+        <h1 class="text-center"><strong>Bienvenido {% if user.estudiante %} estudiante {% else %} arrendador {%endif %}</strong></h1>
+        <h2>¿Qué puedes hacer aqui?</h2>
+        </div>
+    </div>
+    
+    <div class="container" style=" margin-top: 25px;" >
+        <div class="row">
+            <div class="col-md-6">
+                <div class="container">
+                    {% if user.estudiante %}
+                    <h4>Aquí podrás visualizar diversas opciones de propiedades en renta en Guadalupe y Zacatecas, con el objetivo de que encuentres un lugar donde vivir que se acople a tus necesidades durante el tiempo que te encuentres realizando tus estudios universitarios.</h4>
+                    {% else %}
+                    <h4>Aquí podrás gestionar tus propiedades en renta con la finalidad de que puedas encontrar estudiantes arrendatarios que se interesen en alquilar alguna de tus viviendas en Guadalupe y Zacatecas.</h4>
+                    {% endif %}
+                    <div class="text-center">
+                        <h3><strong>¡Disfruta de tu estancia!</strong></h3>
+                    </div>
+                </div>    
+            </div>
+            <div class="col-md-6">
+                <div class=" text-center">
+                    <div class="container">
+                        <img class="img-fluid mb-3n n " src="{% static 'img/Zacatecas.jpg' %}" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+</div>
+ 
+{% endblock contenido %}
+    
+

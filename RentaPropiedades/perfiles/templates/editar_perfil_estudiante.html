@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav-Ver_Perfil_Estudiante %}
+active
+{% endblock nav-Ver_Perfil_Estudiante %}
+
+{% block contenido %}
+
+<div class="content">
+  <div class="container-fluid">
+    <h1 style="text-align: center;">Editar Perfil de Estudiante</h1>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      
+      <div class="form-group">
+        {{ form.nombre.label_tag }}
+        {{ form.nombre }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.apellidos.label_tag }}
+        {{ form.apellidos }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.edad.label_tag }}
+        {{ form.edad }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.sexo.label_tag }}
+        {{ form.sexo }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.foto_perfil.label_tag }}
+        {{ form.foto_perfil }}
+        {% if form.instance.foto_perfil %}
+            <br>
+            <img src="{{ form.instance.foto_perfil.url }}" alt="Foto de perfil actual" style="max-width: 200px; max-height: 200px">
+        {% endif %}
+      </div>
+      
+      <div class="form-group">
+        {{ form.universidad_actual.label_tag }}
+        {{ form.universidad_actual }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.telefono.label_tag }}
+        {{ form.telefono }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.whatsapp.label_tag }}
+        {{ form.whatsapp }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.correo.label_tag }}
+        {{ form.correo }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.preferencias_busqueda.label_tag }}
+        {{ form.preferencias_busqueda }}
+      </div>
+      
+      <div class="form-group">
+        {{ form.pasatiempos.label_tag }}
+        {{ form.pasatiempos }}
+      </div>
+      
+      <span>
+        <a href="{% url 'perfil_estudiante' %}" class="btn btn-warning btn-with-margin">Volver</a>
+        <button type="submit" class="btn btn-primary btn-with-margin">Guardar Cambios</button>
+        <a href="{% url 'eliminar_estudiante' %}" class="btn btn-danger">Eliminar Perfil</a>
+      </span>
+    </form>
+  </div>
+</div>
+
+
+{% endblock  %}

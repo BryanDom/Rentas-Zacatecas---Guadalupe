@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav-Lista_de_propiedades %}
+active
+{% endblock nav-Lista_de_propiedades %}
+
+{% block estilos %}
+<style>
+    .contenedor_general_interesado {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width:100%;
+    }
+
+    .contenedor_interesado{
+        width: 500px;
+        box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 15px;
+        cursor: pointer;
+        border: 1px solid black; /* Borde negro de 1 píxel */
+    }
+
+    .contenedor_foto_perfil{
+        width: 60px;
+      height: 60px;
+      border-radius: 60px;
+      overflow: hidden;
+      margin-right: 10px;
+    }
+
+    .contenedor_foto_perfil img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }    
+
+    #Nombre{
+        margin-top: 10px;
+    }
+
+    .row p{
+        font-size: large;
+    }
+
+    @media (max-width: 767px) {
+        /* Estilos específicos para dispositivos con ancho de pantalla de 767px o menos (celulares) */
+        #Nombre{
+            margin-top: 0px;
+        }
+    }
+
+</style>
+{% endblock estilos %}
+
+{% block contenido %}
+<div class="text-center" style="margin-top: 5px;">
+    <h1 class="text-center" style="font-weight: 300;"><strong>Interesados en la propiedad</strong></h1>
+</div>
+
+{% if vacia %}
+    <div class="text-center">
+        <h2>No hay personas interesadas en esta propiedad</h2>
+    </div>
+    {% else %}
+    <div class="contenedor_general_interesado"">
+        <!-- Mostrar información del resto de interesados -->
+        {% for interesado in interesados %}
+            {% if interesado != interesado_usuario %}
+                <div class="contenedor_interesado">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="contenedor_foto_perfil">
+                                <img src="{{interesado.estudiante.foto_perfil.url}}" alt="...">
+                            </div>
+                        </div>
+                        <div class="col-10" style="align-items: center;">
+                            <div class="container">
+                                <strong><h3 id="Nombre">{{interesado.estudiante.nombre}} {{interesado.estudiante.apellidos}}</h3></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col">
+                            <div class="row">
+                                <p><strong>Edad:</strong> {{interesado.estudiante.edad}}</p>
+                            </div>
+                            <div class="row">
+                                <p><strong>Universidad:</strong> {{interesado.estudiante.universidad_actual}}</p>
+                            </div>
+                            <div class="row">
+                                <p><strong>E-mail: </strong>{{interesado.estudiante.correo}}</p>
+                            </div>
+                            <div class="row">
+                                <p><strong>Teléfono:</strong> {{interesado.estudiante.telefono}}</p>  
+                            </div> 
+                        </div>   
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; align-items: flex-end;">
+                        <a href="{% url 'detalles_estudiante' interesado.estudiante.id %}" class="btn btn-primary btn-fill" style="max-height: 40px; min-height: 40px; ">Ver Perfil</a>
+
+                    </div>                       
+                            
+                </div>
+                
+            {% endif %}
+        {% endfor %}
+    
+    </div>
+{% endif %}
+    
+
+{% endblock contenido %}

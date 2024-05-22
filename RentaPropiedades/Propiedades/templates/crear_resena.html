@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block nav-Lista_de_propiedades %}
+    active
+{% endblock nav-Lista_de_propiedades %}
+
+{% block estilos %}
+    <style>
+        .contenedor_estrellas i {
+            color: #f9d71c;
+        }
+
+        #id_descripcion {
+            width: 50%; /* Establece el ancho deseado */
+            height: 150px; /* Establece la altura deseada */
+            resize: vertical; /* Permite redimensionar verticalmente */
+        }
+
+        @media (max-width: 767px) {
+            /* Estilos específicos para dispositivos con ancho de pantalla de 767px o menos (celulares) */
+            #id_descripcion {
+                width: 100%; /* Establece el ancho deseado */
+                height: 150px; /* Establece la altura deseada */
+                resize: vertical; /* Permite redimensionar verticalmente */
+            }
+        }
+    </style>
+{% endblock estilos %}
+    
+{% block contenido %}
+<h1>Agregar Reseña</h1><br>
+    <form method="post">
+        {% csrf_token %}
+        <strong>{{form.descripcion.label_tag}}</strong>
+        {{ form.descripcion }}
+        <br>
+        <strong>{{form.calificacion.label_tag}}</strong>
+        <div class="contenedor_estrellas" id="contenedor-estrellas">
+            {% for i in rango_estrellas %}
+                <span class="estrella" data-valor="{{ i }}">
+                    {% if i <= resena.calificacion %}
+                        <i class="fas fa-star" style="font-size: 2em;"></i>
+                    {% else %}
+                        <i class="far fa-star" style="font-size: 2em;"></i>
+                    {% endif %}
+                </span>
+            {% endfor %}
+            <!-- Campo oculto para la calificación -->
+            {{ form.calificacion }}
+        </div>
+        <br>
+        <span>
+            <a href="{% url 'lista_resenas' propiedad_id %}" class="btn btn-warning">Cancelar</a>
+            <button class="btn btn-info" type="submit">Guardar</button>
+        </span>
+    </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const estrellas = document.querySelectorAll('.estrella');
+        const inputCalificacion = document.getElementById('id_calificacion');
+
+        // Ocultar el campo de calificación al agregar una reseña
+        inputCalificacion.style.display = 'none';
+
+        estrellas.forEach(function (estrella) {
+            estrella.addEventListener('click', function () {
+                const valorEstrella = parseInt(estrella.dataset.valor);
+
+                // Actualizar el campo oculto con la nueva calificación
+                inputCalificacion.value = valorEstrella;
+
+                // Resaltar las estrellas seleccionadas
+                estrellas.forEach(function (e, index) {
+                    if (index < valorEstrella) {
+                        e.innerHTML = '<i class="fas fa-star" style="font-size: 2em;"></i>';
+                    } else {
+                        e.innerHTML = '<i class="far fa-star" style="font-size: 2em;"></i>';
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock contenido %}

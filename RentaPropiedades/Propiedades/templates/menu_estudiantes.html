@@ -1,0 +1,16 @@
+<ul class="nav flex-column">
+    <li class="nav-item">
+        {% if user.is_authenticated %}
+            <a class="btn btn-primary btn-block" href="{% url 'perfil_estudiante' %}">Perfil</a>
+        {% else %}
+            <!-- El usuario no ha iniciado sesión, puedes mostrar un mensaje o enlace de inicio de sesión aquí -->
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+        {% endif %}
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-primary btn-block" href="{% url 'lista_propiedades' %}">Lista Propiedades</a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-primary btn-block" href="#">Lista Favoritos</a>
+    </li>
+</ul>

@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block nav-Ver_Perfil_Estudiante %}
+active
+{% endblock nav-Ver_Perfil_Estudiante %}
+
+{% block contenido %}
+<h1> ¿Estás seguro de eliminar tu perfil?</h1>
+  <br>
+  <br>
+
+  <h4> Al realizar esta acción, se eliminará de manera definitiva tu perfil del sitio, esto incluye todas las propiedades e imagenes que cargaste. Esta información ya no estará disponible para el resto de usuarios del sitio.
+  </h4>
+
+
+  <span>
+    <a href="{% url 'bienvenida' %}" class="btn btn-warning">Cancelar</a>
+    <a href="{% url 'confirmar_eliminacion_arrendador' %}" class="btn btn-danger"> Eliminar Perfil</a>
+</span>
+{% endblock contenido %}
+

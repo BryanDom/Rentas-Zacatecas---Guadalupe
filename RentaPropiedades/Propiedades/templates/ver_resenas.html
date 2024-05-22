@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav-Lista_de_propiedades %}
+    active
+{% endblock nav-Lista_de_propiedades %}
+
+{% block estilos %}
+    <style>
+        .contenedor_general{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width:100%;
+        }
+
+        .contenedor_resena{
+            width: 500px;
+            box-shadow: 2px 2px 30px rgba(e, 0, 0, 0.1);
+            background-color:#ffffff;
+            padding:20px;
+            margin:15px;
+            cursor:pointer;
+        }
+
+        
+
+        .perfil{
+          display: flex;
+          align-items: center;
+        }
+
+        .contenedor_foto_perfil{
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+          overflow: hidden;
+          margin-right: 10px;
+        }
+
+        .contenedor_foto_perfil img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .contenedor_general_promedio{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width:100%;
+        }
+
+        .contenedor_nombre_fecha{
+            display:flex;
+            flex-direction: column;
+        }
+
+        .contenedor_nombre_fecha strong {
+            color: #3d3d3d;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contenedor_nombre_fecha span{
+            color: #979797;
+            font-size:0.8rem;
+        }
+
+        .contenedor_estrellas i{
+            color: #f9d71c;
+        }
+        
+        .contenedor_sup{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+      
+        .contenedor_promedio{
+            width: 160px;
+            box-shadow: 2px 2px 30px rgba(e, 0, 0, 0.1);
+            background-color:lightcyan;
+            padding:20px;
+            margin:15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contenedor_descripcion p{
+            color: darkslategrey;
+            font-size:large;
+            align-items: center;
+        }
+
+        .contenedor_descripcion p{
+          font-size: 0.9rem;
+          color: #4b4b4b;
+        }
+
+        .contenedor_boton_agregar{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap:wrap;
+            max-height: 100px;
+            min-height: 100px;
+            
+        }
+
+    </style>
+{% endblock estilos %}
+    
+
+
+{% block contenido %}
+{% if vacia%}
+<div class="text-center">
+    <h2> No hay reseñas para esta propiedad</h2>
+</div>
+
+{% if user and es_estudiante %}
+<div class="text-center">
+    <a class="btn btn-success" href="{% url 'agregar_resena' propiedad.id %}">Agregar Reseña</a>
+</div>
+{% endif %}
+    
+{% else %}
+<form action="" method="post" id="form">
+
+  <div class="text-center" style="margin-top: 5px;">
+    <h1 class="text-center"><strong>Lista de reseñas</strong></h1>
+</div>
+    <br>
+
+    <div class="text-center">
+      <h4>La calificacion general de la propiedad es de: </h2>
+    </div>
+
+    <div class="contenedor_general_promedio">
+        <div class="contenedor_promedio">
+            <div class="contenedor_puntuacion">
+                <strong>{{promedioRedondeado}}</strong>
+            </div>
+            <div class="contenedor_estrellas">
+              {% for i in rango_estrellas %}
+              <span class="estrella" data-valor="{{ i }}">
+                  {% if promedioRedondeado >= i %}
+                      <i class="fas fa-star"></i>
+                  {% else %}
+                      <i class="far fa-star"></i>
+                  {% endif %}
+              </span>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor_general">
+        {% for resena in resenas %}
+            <div class="contenedor_resena">
+              <div class="contenedor_sup">
+                <div class="perfil">
+                  <div class="contenedor_foto_perfil">
+                    <img src="{{resena.estudiante.foto_perfil.url}}" alt="">
+                  </div>
+                  <div class="contenedor_nombre_fecha">
+                    <strong>{{resena.estudiante.nombre}} {{resena.estudiante.apellidos}}</strong>
+                    <span>{{resena.fecha}}</span>
+                  </div>
+                </div>
+                <div class="contenedor_estrellas">
+                  {% for i in rango_estrellas %}
+                  <span class="estrella" data-valor="{{ i }}">
+                  {% if resena.calificacion >= i %}
+                      <i class="fas fa-star"></i>
+                  {% else %}
+                      <i class="far fa-star"></i>
+                  {% endif %}
+                  </span>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="contenedor_descipcion">
+                <p>{{resena.descripcion}}</p>
+              </div>
+            </div>
+                
+        {% endfor %}
+    </div>
+
+    
+    {% if hayResena %}
+        <div class="text-center">
+            <h2>Ya has insertado una reseña:</h2>
+        </div>
+        <div class="contenedor_general">
+          <div class="contenedor_resena">
+            <div class="contenedor_sup">
+              <div class="perfil">
+                <div class="contenedor_foto_perfil">
+                  <img src="{{resena_usuario.estudiante.foto_perfil.url}}" alt="">
+                </div>
+                <div class="contenedor_nombre_fecha">
+                  <strong>{{resena_usuario.estudiante.nombre}} {{resena.estudiante.apellidos}}</strong>
+                  <span>{{resena_usuario.fecha}}</span>
+                </div>
+              </div>
+              <div class="contenedor_estrellas">
+                {% if resena_usuario.calificacion == 1 %}
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                
+                {% elif resena_usuario.calificacion == 2 %}
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+        
+                {% elif resena_usuario.calificacion == 3%}
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+
+                {% elif resena_usuario.calificacion == 4%}
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                {% else %}
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                {% endif %}
+              </div>
+            </div>
+            <div class="contenedor_descipcion">
+              <p>{{resena_usuario.descripcion}}</p>
+            </div>
+          </div>
+          <div>
+            <a href="{% url 'editar_resena'  %}" style="border-radius: 10px; margin: 10px;" class="btn btn-success" >
+              <i class="fas fa-pencil-alt" style="font-size: 2em;"></i> 
+            </a>
+            <a href="{% url 'confirmacion_eliminacion_resena'%}" style="border-radius: 10px; margin: 10px;" class="btn btn-danger" >
+              <i class="fas fa-trash" style="font-size: 2em;"></i> 
+            </a>
+        </div>
+        </div>
+        
+    {% else %}
+    
+    
+    {% if user and es_estudiante %}
+    <div class="text-center">
+        <a class="btn btn-success" href="{% url 'agregar_resena' propiedad.id %}">Agregar Reseña</a>
+    </div>
+    {% endif %}
+        
+    {% endif %}
+
+
+</form>
+
+
+{% endif %}
+{% endblock contenido %}

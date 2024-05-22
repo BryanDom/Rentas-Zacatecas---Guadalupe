@@ -1,0 +1,119 @@
+.btn{
+    font-size: 16px;
+    color: white;
+    padding: 7px;
+    border-radius: 3px;
+}
+.btn-rojo{
+    background-color: red;
+}
+
+.btn-verde{
+    background-color: green;
+}
+
+.container_transparente{
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.btn_grande {
+    padding: 20px 40px; /* Ajusta el espaciado interno para aumentar el tamaño */
+    font-size: 24px; /* Ajusta el tamaño de fuente para aumentar la altura del botón */
+}
+
+.btn_mediano {
+    padding: 15px 30px; /* Ajusta el espaciado interno para aumentar el tamaño */
+    font-size: 18px; /* Ajusta el tamaño de fuente para aumentar la altura del botón */
+}
+
+.btn_redondo {
+    border-radius: 50px; /* Ajusta el valor para controlar la redondez del borde */
+}
+
+.contenedor_titulo_listaPropiedades {
+    position: -webkit-sticky; /* Para navegadores basados en Webkit */
+    position: sticky;
+    top: 0; /* Fija el elemento en la parte superior de su contenedor */
+    z-index: 100; /* Asegura que esté por encima del contenido desplazado */
+    background-color: whitesmoke;
+}
+
+.btn_regresar{
+    padding: 13px 26px; /* Ajusta el espaciado interno para aumentar el tamaño */
+    font-size: 16px; /* Ajusta el tamaño de fuente para aumentar la altura del botón */
+    border-radius: 50px; /* Ajusta el valor para controlar la redondez del borde */
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    z-index: 999;
+}
+
+
+
+.contenedor_tipo_precio{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.contenedor_ubicacion{
+    margin-top: 50px;
+}
+
+/* Contenedor para mostrar el contenido de la propiedad */
+#content-container {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    --bs-bg-opacity: .5;
+}
+
+
+#imagenCarousel {
+    width: 350px; /* Ancho fijo */
+    height: 300px; /* Alto fijo */
+    margin: 0 auto; /* Centrar horizontalmente */
+    overflow: hidden; 
+}
+
+#imagenCarousel .carousel-inner img {
+    width: 350px; /* Ancho fijo */
+    height: 300px; /* Alto fijo */
+    object-fit: cover;
+}
+
+#userLogo {
+    width: 60px; /* Ancho de 30px */
+    height: auto; /* Mantener la proporción de la imagen */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    background-color: rgb(29, 44, 44);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    color: white;
+    font-size: 5px;
+}
+
+
+.blanco-solidez {
+    background-color: white;
+    padding: 20px; 
+    border: 1px solid #ddd; 
+}
+
+.blanco-opaco {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px; 
+}
+
+.btn-with-margin {
+    margin-right: 50px;
+}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav-Mis_propiedades %}
+active
+{% endblock nav-Mis_propiedades %}
+
+
+{% block contenido %}
+
+
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'success' %}
+        <div class="alert alert-success" role="alert">
+        {{ message }}
+        </div>
+    {% elif message.tags == 'warning' %}
+        <div class="alert alert-danger" role="alert">
+        {{ message }}
+        </div>
+    {% else %}
+        <div class="alert" role="alert">
+        {{ message }}
+        </div>
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="text-center">
+    <h1>Editar Propiedad</h1>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.descripcion.label_tag }}
+                        {{ form.descripcion }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.precio.label_tag }}
+                        {{ form.precio }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.tipo.label_tag }}
+                        {{ form.tipo }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.serviciosIncluidos.label_tag }}
+                        {{ form.serviciosIncluidos }}
+                    </div> 
+                
+                    <div class="form-group">
+                        <label for="id_imagen">Nueva Imagen</label>
+                        <input type="file" name="imagen" id="id_imagen" accept="image/*">
+                    </div>
+                
+                    {% for imagen in imagenes_propiedad %}
+                    <div class="form-group">
+                        <label for="id_imagen_{{ forloop.counter }}">Imagen {{ forloop.counter }}</label>
+                        {% if imagen.imagen %}
+                        <br>
+                        <img src="{{ imagen.imagen.url }}" alt="Imagen actual" style="max-width: 200px; max-height: 200px">
+                        <input type="checkbox" name="eliminar_imagen_{{ imagen.id }}" id="eliminar_imagen_{{ imagen.id }}">
+                        <label for="eliminar_imagen_{{ imagen.id }}">🗑️ Eliminar</label>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-danger" href="{% url 'propiedades_arrendador' %}" role="button">Cancelar</a>
+                        <button type="submit" class="btn btn-success"  >Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+    

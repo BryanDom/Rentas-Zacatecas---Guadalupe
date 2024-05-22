@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav-Favoritos %}
+  active
+{% endblock nav-Favoritos %}
+
+
+
+{% block contenido %}
+
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'success' %}
+        <div class="alert alert-success" role="alert">
+        {{ message }}
+        </div>
+    {% elif message.tags == 'warning' %}
+        <div class="alert alert-danger" role="alert">
+        {{ message }}
+        </div>
+    {% else %}
+        <div class="alert" role="alert">
+        {{ message }}
+        </div>
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="text-center container-fluid">
+  <h1>Favoritos</h1>
+</div>
+
+  {% if propiedades %} 
+  {% for propiedad in propiedades %}
+
+  <div class="d-flex justify-content-center align-items-center container-fluid">
+    <div class="card mb-3" style="border: 2px solid gray;max-width: 540px; margin: 5px;">
+      <div class="row g-0">
+        <div class="col-md-4" style="text-align: center;">
+          <img src="{{propiedad.primerImagen}}"  style="object-fit: cover; margin: 2px;" class=" card-img-top " width="150" height="150"  alt="...">
+          <!-- <img src="" class="card-img-top" style="object-fit: cover;margin: 5px;"> -->
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{propiedad.ubicacion}}</h5>
+            <p class="card-text">{{propiedad.precio}}</p>
+          </div>
+          <div class="container text-center mt-auto" style="margin: 5px;" >
+            <a href="{% url 'detalle_propiedad' propiedad.id %}" class="btn_redondo btn btn-primary">Detalles</a>
+          </div>
+        </div>
+      </div>
+  </div>
+    <div>
+      <a href="{% url 'confirmar_eliminacion_favorito' propiedad.id %}" style="border-radius: 10px; margin: 10px;" class="btn btn-danger" >
+        <i class="fas fa-trash" style="font-size: 2em;"></i> 
+      </a>
+    </div>
+  </div>
+  {% endfor %}         
+  {% else %}
+
+  <div class="text-center">
+    <h2 style="align-items: center;">No tienes propiedades favoritas.</h2>
+  </div>
+
+
+  {% endif %}
+  </div>
+</div>
+{% endblock contenido %}
+  
+    
+
+    

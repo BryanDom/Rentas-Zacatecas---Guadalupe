@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+  <style>
+      /*
+      Establece el color de fondo del elemento jumbotron a blanco con una opacidad del 50%.
+      Esto crea un efecto visual donde el jumbotron parece semi-transparente, permitiendo que
+      la imagen de fondo se vea a través de él.
+      */
+      
+
+      
+      .blanco-opaco {
+      background-color: rgba(255, 255, 255, 0.8); 
+      padding: 20px; 
+      }
+      
+
+      .btn-primary {
+        display: block;
+        width: 83%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      p.mb-0 {
+        color: #4716ea;
+      }
+
+      .container{
+        max-width: 1300px;
+        line-height: 1.5;
+      }
+
+      .container_form{
+        max-width: 1054px;
+      }
+
+  </style>
+</head>
+<body>
+    <div class="container container-fluid text-center">
+      <div class="jumbotron mt-5 text-center" style="background-color: #e1e1e1;">
+        <h1 class="text-center"><strong>Bienvenido al Sistema de consulta de lugares en renta en Zacatecas-Guadalupe</strong></h1>
+      </div>
+      
+      
+      <h4 class="text-center" style="font-size: 2.0rem;"><strong>LOGIN</strong></h4>
+      <br>
+
+
+      <form method="post" action="{% url 'login' %}">
+        <center>
+          <div class="container_form" style="text-align: left; flex-direction: column;">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label for="username">email:</label>
+              <input type="email" class="form-control" id="username" name="username" placeholder="ejemplo@dominio.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="password">password:</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="contraseña" required>
+            </div>
+            {% if error %}
+              <p class="text-danger">{{ error }}</p>
+            {% endif %}
+          </div>
+        </center>
+
+        <!-- Agregamos la lógica para mostrar el mensaje de cuenta desactivada -->
+        {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
+          {% elif message.tags == 'warning' %}
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+          {% else %}
+            <div class="alert" role="alert">
+              {{ message }}
+            </div>
+          {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+        <div class="">
+          <button type="submit" class="btn btn-block btn-primary font-weight-medium auth-form-btn" style="background-color: #563adc; padding: 10px;">Iniciar sesión</button>
+        </div>
+
+      </form>
+
+      <div class="mt-4 text-center">
+        <p class="mb-0"><strong>¿No tienes cuenta? Crea una</strong></p>
+        <a href="{% url 'nuevo_estudiante' %}" class="text-primary">Crear cuenta estudiante</a>
+        <br><br>
+        <a href="{% url 'nuevo_arrendador' %}" class="text-primary">Crear cuenta arrendador</a>
+        </div>
+        <input type="hidden" value="{{next}}" name="next">
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block nav-Ver_Perfil_Arrendador %}
+active
+{% endblock nav-Ver_Perfil_Arrendador %}
+
+{% block contenido %}
+
+
+
+<div class="formulario-container">
+
+  <div class="card card-user">
+    <div class="card-image">
+        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
+    </div>
+    <div class="card-body">
+      <div class="author">
+        <a>
+          <img class="avatar border-gray" src="{{ arrendador.foto_perfil.url }}" alt="...">
+          <h5 class="title" style="color: purple;">{{ arrendador.nombre }} {{ arrendador.apellidos }}</h5>
+        </a>
+        <p class="description"><strong>Arrendador</strong></p>
+        <p class="description"><strong>Edad: </strong>{{ arrendador.edad }}</p>
+        <p class="description"><strong>Sexo: </strong>{{ arrendador.get_sexo_display }}</p>
+        <p class="description"><strong>Ocupación: </strong>{{ arrendador.ocupacion }}</p>
+        <p class="description"><strong>Teléfono: </strong>{{ arrendador.telefono }}</p>
+        <p class="description"><strong>Preferencias de perfil de arrendatario: </strong>{{ arrendador.preferencias_arrendatarios }}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="button-container mr-auto ml-auto">
+      <div class="button-container mr-auto ml-auto">
+        <button class="btn btn-simple btn-link btn-icon">
+          <a href="tel: {{arrendador.telefono}}"><i class="fa fa-phone" style="width: 35px; font-size: 35px;"></i></a>
+        </button>
+        <button class="btn btn-simple btn-link btn-icon">
+          <a href="https://api.whatsapp.com/send?phone=52{{ arrendador.whatsapp }}"><i class="fab fa-whatsapp"></i></a>
+        </button>
+        <button class="btn btn-simple btn-link btn-icon">
+          <a href="mailto: {{arrendador.correo}}"><i class="fa fa-envelope"></i></a>
+        </button>
+      </div>
+    </div>
+    <div class="button-container mr-auto ml-auto">
+      <form method="post">
+        <span>
+          <a href="{% url 'editar_perfil_arrendador' %}" class="btn btn-info">Editar Perfil</a>
+        </span>
+      </form>
+    </div>
+  </div>
+
+  
+  
+</div>
+
+{% endblock contenido  %}
+
+<!-- <div class="info-container">
+  <div class="info">
+    <p><strong>Nombre: </strong>{{ arrendador.nombre }} {{ arrendador.apellidos }}</p>
+    <p><strong>Edad: </strong>{{ arrendador.edad }}</p>
+    <p><strong>Sexo: </strong>{{ arrendador.get_sexo_display }}</p>
+    <p><strong>Ocupación: </strong>{{ arrendador.ocupacion }}</p>
+    <p><strong>Teléfono: </strong>{{ arrendador.telefono }}</p>
+    <p><strong>WhatsApp: </strong>{{ arrendador.whatsapp }}</p>
+    <p><strong>Correo Electrónico: </strong>{{ arrendador.correo }}</p>
+    <p><strong>Preferencias de perfil de arrendatario: </strong>{{ arrendador.preferencias_arrendatarios }}</p>
+    <form method="post">
+      <span>
+        <a href="{% url 'bienvenida' %}" class="btn btn-warning"> Volver</a>
+        <a href="{% url 'editar_perfil_arrendador' %}" class="btn btn-info">Editar Perfil</a>
+      </span>
+    </form>
+    
+  </div>
+  <div class="imagen-container">
+    <img class="foto-perfil" src="{{ arrendador.foto_perfil.url }}" alt="Foto de Perfil">
+  </div>
+</div> -->

@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav-Lista_de_propiedades %}
+active
+{% endblock nav-Lista_de_propiedades %}
+
+
+{% block estilos %}
+  
+    <style>
+        
+
+        /* Contenedor para mostrar el contenido de la propiedad */
+        #content-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            --bs-bg-opacity: .5;
+        }
+
+        #imagenCarousel {
+            width:50%; /* Ancho fijo */
+            height: 50%; /* Alto fijo */
+            margin: 0 auto; /* Centrar horizontalmente */
+            overflow: hidden;
+        }
+
+        #imagenCarousel .carousel-inner img {
+            width: 100%;
+            height: 300px; /* Alto fijo */
+            object-fit: cover;
+            
+        }
+        @media (max-width: 767px) {
+        /* Estilos específicos para dispositivos con ancho de pantalla de 767px o menos (celulares) */
+        #imagenCarousel {
+            width:100%; /* Ancho fijo */
+            height: 50%; /* Alto fijo */
+            margin: 0 auto; /* Centrar horizontalmente */
+            overflow: hidden;
+        }
+
+        #imagenCarousel .carousel-inner img {
+            width: 100%;
+            height: 300px; /* Alto fijo */
+            object-fit: cover;
+        }
+    }
+
+        #userLogo, #favorites {
+            width: 80px; /* Ancho de 30px */
+            height: auto; /* Mantener la proporción de la imagen */
+        }
+
+        #resena, #interesado {
+            width: 80px; /* Ancho de 30px */
+            height: auto; /* Mantener la proporción de la imagen */
+        }
+        
+        p{
+            font-size:x-large;
+            margin-bottom: 1em;
+        }
+        
+
+        .carousel-control-prev, .carousel-control-next {
+            background-color: rgb(29, 44, 44);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            color: white;
+            font-size: 5px;
+        }
+
+        .image-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+{% endblock estilos %}
+
+{% block contenido %}
+
+<div class="container">
+    
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">
+            {{ message }}
+            </div>
+        {% elif message.tags == 'warning' %}
+            <div class="alert alert-danger" role="alert">
+            {{ message }}
+            </div>
+        {% else %}
+            <div class="alert" role="alert">
+            {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <div class="container">
+        <div id="imagenCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for imagen in imagenes %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ imagen.imagen.url }}" class="d-block img-fluid" alt="Imagen de la Propiedad">
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#imagenCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+            </a>
+            <a class="carousel-control-next" href="#imagenCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="text-center" style="background-color: #e1e1e1; margin-top: 5px;">
+        <h1 class="text-center"><strong>Detalles de propiedad</strong></h1>
+    </div>
+
+    
+
+    <div class="container" style=" margin-top: 25px;" >
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <p><strong>Ubicación:</strong> {{ propiedad.ubicacion }}</p>
+                    <p><strong>Precio mensual:</strong> ${{ propiedad.precio }}</p>
+                    <p><strong>Tipo de propiedad:</strong> {% if propiedad.tipo == 1 %}Casa{% elif propiedad.tipo == 2 %}Departamento{% else %}Cuarto{% endif %}</p>
+                    <p><strong>Servicios Incluidos:</strong> {% if propiedad.serviciosIncluidos %}Sí{% else %}No{% endif %}</p>
+                    <p><strong>Descripcion de propiedad: </strong>{{ propiedad.descripcion }}</p>
+                </div>    
+            </div>
+
+            
+            {% if user and es_estudiante %}
+                <div class="col text-center">
+                    <div class="container" style="margin-bottom: 10px;">
+                        <img id="userLogo" src="{% static 'img/user-logo.png' %}" alt="Logotipo de Usuario" class="mb-3">
+                        <br>
+                        <a role="button" class=" btn btn-primary"  href="{% url 'detalles_arrendador' propiedad.id %}">Info Arrendador</a>
+                    </div>
+                    <div class="container" style="margin-bottom: 10px;">
+                        <img id="resena" src="{% static 'img/resenas.png' %}" alt="resenas" class="mb-3">
+                        <br>
+                        <a role="button" class="btn btn-primary" href="{% url 'lista_resenas' propiedad.id %}">Reseñas de la propiedad</a>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div class="container" style="margin-top: 10px;">
+                        <img id="favorites" src="{% static 'img/favorito.png' %}" alt="Propiedad favorita" class="mb-3">
+                        <br>
+                        <a role="button" class=" btn btn-primary" href="{% url 'agregaraListaFavoritos' propiedad.id %}">Agregar a Favoritos</a>
+                    </div>
+                    <div class="container" style="margin-bottom: 10px;">
+                        <img id="interesado" src="{% static 'img/interesados.png' %}" alt="interesados" class="mb-3">
+                        <br>
+                        <a role="button" class="btn btn-primary " href="{% url 'lista_interesados' propiedad.id %}">Interesados</a>
+                    </div>
+                    <a href="{% url 'indicar_interes'  propiedad.id %}" style="color: #4f58b8;">Inscribirme en la lista de interesados</a>
+                </div>
+            
+            {% elif user and es_arrendador %}
+                <div class="coltext-center">
+                    <div class="container" style="margin-bottom: 10px;">
+                        <img id="resena" src="{% static 'img/resenas.png' %}" alt="resenas" class="mb-3">
+                        <br>
+                        <a role="button" class="btn btn-primary btn-lg" href="{% url 'lista_resenas' propiedad.id %}">Reseñas de la propiedad</a>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div class="container" style="margin-bottom: 10px;">
+                        <img id="interesado" src="{% static 'img/interesados.png' %}" alt="interesados" class="mb-3">
+                        <br>
+                        <a role="button" class="btn btn-primary btn-lg" href="{% url 'lista_interesados' propiedad.id %}">Interesados</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock contenido %}

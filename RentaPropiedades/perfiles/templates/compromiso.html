@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  
+    
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+    
+    <title> Sistema de consultas de propiedades en renta en Zacatecas y Guadalupe </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link href="{% static 'css/light-bootstrap-dashboard.css' %}" rel="stylesheet" />
+
+    <style>
+        /*
+        Establece el color de fondo del elemento jumbotron a blanco con una opacidad del 50%.
+        Esto crea un efecto visual donde el jumbotron parece semi-transparente, permitiendo que
+        la imagen de fondo se vea a través de él.
+        */
+        .jumbotron {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        
+        .blanco-opaco {
+        background-color: rgba(255, 255, 255, 0.8); 
+        padding: 20px; 
+        }
+
+        /* Añade esta regla para cambiar el color de fondo del body */
+        
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron mt-5 text-center " style="background-color: #e1e1e1;">
+            <p class="lead">
+                <br><br>
+                <p class="lead">
+                    <strong style="text-align: left; display: block;"><strong>Nuestro compromiso:</strong></strong><br> 
+                    <strong>La plataforma de alquiler en Zacatecas y Guadalupe es una comunidad acogedora 
+                    donde queremos que todos se sientan como en casa sin importar su origen.
+                    Para garantizar este ambiente inclusivo, pedimos que todos los usuarios se comprometan a seguir lo siguiente:
+                    <br><br> En nuestra comunidad, nos esforzamos por respetar y tratar a todos sin prejuicios, sin importar
+                    el color de piel, la religión, la nacionalidad, la etnia, el género, la identidad de género, 
+                    la orientación sexual o si tienen alguna discapacidad. Queremos que todos se sientan bienvenidos 
+                    y seguros al utilizar nuestros servicios. Gracias por unirte a nosotros para crear un entorno donde 
+                    la diversidad es valorada.</strong>
+                </p>                
+            <hr class="my-4">
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <a class="btn btn-primary mb-3" href="{% url 'contrasena' %}" role="button">Aceptar y continuar</a>
+                <a class="btn btn-danger" href="{% url 'login' %}" role="button">Rechazar y salir</a>
+            </div>            
+        </div>
+    </div>
+</body>
+
+
+<script src="{% static 'js/core/jquery.3.2.1.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/core/popper.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/core/bootstrap.min.js' %}" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="{% static 'js/plugins/bootstrap-switch.js' %}"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="{% static 'js/plugins/chartist.min.js' %}"></script>
+<!--  Notifications Plugin    -->
+<script src="{% static 'js/plugins/bootstrap-notify.js' %}"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="{% static 'js/light-bootstrap-dashboard.js' %}" type="text/javascript"></script>
+
+</html>

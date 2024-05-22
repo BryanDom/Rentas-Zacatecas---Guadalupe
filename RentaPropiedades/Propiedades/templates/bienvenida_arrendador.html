@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Bienvenido, Arrendador
+{% endblock titulo %}
+
+{% block contenido %}
+<style>
+    .btn_mediano {
+        padding: 0.25rem 0.5rem; /* Ajusta el padding para reducir el tamaño a la mitad */
+        font-size: 0.875rem; /* Ajusta el tamaño de fuente */
+    }
+</style>
+
+<div class="container mt-5 text-center blanco-opaco">
+    <h1 class="display-4"><strong>¡Bienvenido, Arrendador!</strong></h1>
+    <p class="lead"><strong>En esta plataforma, te ofrecemos la valiosa oportunidad de poner en renta tus propiedades en Zacatecas y Guadalupe.</strong></p>
+    <p class="lead"><strong>¿Qué puedes hacer aquí?</strong></p>
+    <ul class="list-group">
+        <li class="list-group-item">Llegar a una audiencia amplia de estudiantes que se interesen en tu propiedad</li>
+        <li class="list-group-item">Dar a conocer tus datos de contacto para que tus posibles inquilinos te contacten con facilidad.</li>
+    </ul>
+    <hr class="my-4">
+    <div class="align-items-center">
+        <a class="btn_mediano btn_redondo btn btn-success btn-lg" href="{% url 'agregar_propiedad' %}" role="button">Agregar Propiedad</a>
+    </div>
+    <a class="btn_mediano btn_regresar btn btn-danger btn-lg position-fixed top-0 start-0 m-3" href="{% url 'bienvenida' %}" role="button">Regresar</a>
+</div>
+{% endblock contenido %}
+
+

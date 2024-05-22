@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav-Mis_propiedades %}
+active
+{% endblock nav-Mis_propiedades %}
+
+
+
+  
+
+
+{% block contenido %}
+
+{% if mensaje %}
+
+{{mensaje}}
+
+{% endif %}
+<form action="" method="post" id="form">
+  {% csrf_token %}
+  <div class="text-center container-fluid">
+      <h1>Mis propiedades</h1>
+  </div>
+
+  {% for propiedad in propiedades %}
+    <div class="d-flex justify-content-center align-items-center container-fluid">
+      <div class="card mb-3" style="border: 2px solid gray;max-width: 540px; margin: 5px;">
+        <div class="row g-0">
+          <div class="col-md-4" style="text-align: center;">
+            <img src="{{propiedad.primerImagen}}"  style="object-fit: cover; margin: 2px;" class=" card-img-top " width="150" height="150"  alt="...">
+            <!-- <img src="" class="card-img-top" style="object-fit: cover;margin: 5px;"> -->
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{propiedad.ubicacion}}</h5>
+              <p class="card-text">{{propiedad.get_tipo_display}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+      <div>
+        <a href="{% url 'detalle_propiedad' propiedad.id %}" class="btn_redondo btn btn-primary">Detalles</a>
+        <a href="{% url 'editar_propiedad' propiedad.id %}" style="border-radius: 10px; margin: 10px;" class="btn btn-success" >
+          <i class="fas fa-pencil-alt" style="font-size: 2em;"></i> 
+        </a>
+        <a href="{% url 'confirmacion_eliminacion_propiedad' propiedad.id %}" style="border-radius: 10px; margin: 10px;" class="btn btn-danger" >
+          <i class="fas fa-trash" style="font-size: 2em;"></i> 
+        </a>
+      </div>
+    </div>
+    
+  {% endfor %}
+
+  
+</form>
+  
+<div class="text-center container-fluid">
+  <a class="btn btn-info" href="{% url 'agregar_propiedad' %}"> Nueva Propiedad</a>  
+</div>
+
+{% endblock contenido %}
+    
+
+

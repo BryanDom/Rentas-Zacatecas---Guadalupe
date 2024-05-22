@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav-Lista_de_propiedades %}
+    active
+{% endblock nav-Lista_de_propiedades %}
+
+
+{% block contenido %}
+<h1> ¿Estás seguro de querer eliminar la Reseña?</h1>
+
+<br>
+<br>
+
+<h4> Al realizar esta acción, se eliminará de manera definitiva la reseña de la propiedad.</h4>
+
+
+<span>
+  <a href="{% url 'lista_resenas' propiedad_id%}" class="btn btn-warning">Cancelar</a>
+  <a href="{% url 'eliminar_resena' %}" class="btn btn-danger">Eliminar</a> 
+</span>
+{% endblock contenido %}
+    
+

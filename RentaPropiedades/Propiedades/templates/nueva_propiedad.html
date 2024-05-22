@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav-Mis_propiedades %}
+    active
+{% endblock nav-Mis_propiedades %}
+    
+    
+
+{% block contenido %}
+
+<div class="text-center">
+    <h1>Nueva Propiedad</h1>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+            
+            {% if mensaje %}
+                <h4> {{mensaje}} </h4>
+            {% endif %}
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Campo para la descripción de la propiedad -->
+                    <div class="form-group">
+                        <label for="{{ form_propiedad.descripcion.id_for_label }}">Descripción de la propiedad:</label>
+                        {{ form_propiedad.descripcion }}
+                    </div>
+
+                    <br>
+
+                    <!-- Campo para el precio de la propiedad -->
+                    <div class="form-group">
+                        <label for="{{ form_propiedad.precio.id_for_label }}">Precio de la propiedad:</label>
+                        {{ form_propiedad.precio }}
+                    </div>
+
+                    <br>
+
+                    <!-- Campo para el tipo de propiedad -->
+                    <div class="form-group">
+                        <label for="{{ form_propiedad.tipo.id_for_label }}">Tipo de propiedad:</label>
+                        {{ form_propiedad.tipo }}
+                    </div>
+
+                    <br>
+
+                    <!-- Campo para la calle de la propiedad -->
+                    <div class="form-group">
+                        <label for="calle">Calle (este campo ya no se podra editar):</label>
+                        <input type="text" id="calle" name="calle" class="form-control" placeholder="Calle" required>
+                    </div>
+
+                    <br>
+
+                    <!-- Campo para el número de la propiedad -->
+                    <div class="form-group">
+                        <label for="numero">Número (este campo ya no se podra editar):</label>
+                        <input type="text" id="numero" name="numero" class="form-control" placeholder="Número" pattern="^\d{1,5}[A-Za-z]?$" title="Numero y letra (Opcional)" required>
+                    </div>
+
+                    <br>
+
+                    <!-- Campo para el municipio de la propiedad -->
+                    <div class="form-group">
+                        <label for="municipio">Municipio (este campo ya no se podra editar):</label>
+                        <select id="municipio" name="municipio" class="form-control" required>
+                            <option value="">-------</option>
+                            {% for municipio in municipios %}
+                                <option value="{{ municipio.nombre }}">{{ municipio.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <br>
+
+                    <!-- Campo para el colonia de la propiedad -->
+                    <div class="form-group">
+                        <label for="colonia">Colonia (este campo ya no se podra editar):</label>
+                        <select id="colonia" name="colonia" class="form-control" required disabled>
+                            <option value="">-------</option>
+                        </select>
+                    </div>
+
+                    <br>
+
+                    <!-- Campos para las imágenes de la propiedad. Las primeras dos imágenes son obligatorias, las demás son opcionales. -->
+                    {% for form_imagen in form_imagenes %}
+                    <div class="form-group">
+                        <label for="{{ form_imagen.imagen.id_for_label }}">Imagen de la Propiedad {% if forloop.counter <= 2 %}(obligatoria){% else %}(opcional){% endif %} </label>
+                        <!--Es obligatoria las 2 primeras, las 3 siguientes son opcionales así que sin required-->
+                        {{ form_imagen.imagen }}
+                    </div>
+                    {% endfor %}
+
+                    <br>
+
+                    <!-- Campo para indicar si los servicios están incluidos -->
+                    <div class="form-group">
+                        <label for="{{ form_propiedad.serviciosIncluidos.id_for_label }}">¿Servicios incluidos?</label>
+                        {{ form_propiedad.serviciosIncluidos }}
+                    </div>
+
+                    <br>
+
+                    <center>
+                        <input type="checkbox" name="check" id="GFG" value="1" required> Declaro que la información es verídica y cualquier información falsa sobre la propiedad será eliminada inmediatamente.<br> 
+                    </center>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-danger" href="{% url 'propiedades_arrendador' %}" role="button">Cancelar</a>
+                        <button type="submit" class="btn btn-success mt-3 float-right">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}
+
+
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Función para cargar las colonias basadas en el municipio seleccionado
+        $('#municipio').change(function() {
+            var selectedMunicipio = $(this).val();
+            if (selectedMunicipio !== "") {
+                $.ajax({
+                    url: "{% url 'obtener_colonias' %}",
+                    data: {municipio: selectedMunicipio},
+                    dataType: 'json',
+                    success: function(data) {
+                        var coloniasSelect = $('#colonia');
+                        coloniasSelect.empty();
+                        coloniasSelect.append($('<option>', {
+                            value: '',
+                            text: '-------'
+                        }));
+                        $.each(data.colonias, function(index, colonia) {
+                            coloniasSelect.append($('<option>', {
+                                value: colonia.nombre,
+                                text: colonia.nombre
+                            }));
+                        });
+                        coloniasSelect.prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#colonia').empty().prop('disabled', true);
+            }
+        });
+    });
+</script>
+
+<!-- Se utiliza el jQuery para seleccionar los dos primeros campos de entrada para archivos 
+(input[type=file]) y agregarles el atributo required. 
+Esto se hace después de que la página se haya cargado completamente ($(document).ready()).-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('input[type=file]').slice(0, 2).attr('required', true);
+    });
+</script>
+
+<script>
+    const descripcionField = document.getElementById("id_descripcion");  // Reemplaza "id_descripcion" con el ID real del campo de descripción
+    const descripcionError = document.getElementById("descripcion-error");
+
+    descripcionField.addEventListener("input", function () {
+        const descripcionValue = descripcionField.value;
+        const specialCharacters = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;  // Define aquí los caracteres especiales que deseas prohibir
+
+        if (specialCharacters.test(descripcionValue)) {
+            descripcionError.style.display = "block";
+        } else {
+            descripcionError.style.display = "none";
+        }
+    });
+</script>
+{% endblock scripts %}
+    
