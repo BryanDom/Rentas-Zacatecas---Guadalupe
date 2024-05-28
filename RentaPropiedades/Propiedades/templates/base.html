@@ -64,14 +64,14 @@
             {% if user.estudiante %}
             <li class=" nav-item {% block nav-Ver_Perfil_Estudiante %} {% endblock nav-Ver_Perfil_Estudiante %}"> 
                 
-                <a class="nav-link" href="{% url 'perfil_estudiante' %}">
+                <a id="btn-perfil" class="nav-link" href="{% url 'perfil_estudiante' %}">
                   <i class="nc-icon nc-circle-09"></i>
                   <p>Ver Perfil</p>
                 </a>
             </li>
 
             <li class=" nav-item {% block nav-Lista_de_propiedades %} {% endblock nav-Lista_de_propiedades %}">
-                <a class="nav-link" href="{% url 'lista_propiedades' %}">
+                <a id="btn-propiedades" class="nav-link" href="{% url 'lista_propiedades' %}">
                   <i class="nc-icon nc-notes"></i>
                   <p>Lista de propiedades</p>
                 </a>

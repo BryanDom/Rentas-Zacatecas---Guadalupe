@@ -15,6 +15,16 @@ active
       {% csrf_token %}
       {{ form.non_field_errors }}
       
+      {% if errors %}
+          <ul>
+          {% for field in form %}
+            {% if field.errors %}
+              <li>{{ field.label }}: {{ field.errors }}</li>
+            {% endif %}
+          {% endfor %}
+          </ul>
+      {% endif %}
+
       <div class="form-group">
         {{ form.nombre.label_tag }}
         {{ form.nombre }}
@@ -76,8 +86,8 @@ active
       
       <span>
         <a href="{% url 'perfil_estudiante' %}" class="btn btn-warning btn-with-margin">Volver</a>
-        <button type="submit" class="btn btn-primary btn-with-margin">Guardar Cambios</button>
-        <a href="{% url 'eliminar_estudiante' %}" class="btn btn-danger">Eliminar Perfil</a>
+        <button id="btn-guardar" type="submit" class="btn btn-primary btn-with-margin">Guardar Cambios</button>
+        <a id="btn-eliminar" href="{% url 'eliminar_estudiante' %}" class="btn btn-danger">Eliminar Perfil</a>
       </span>
     </form>
   </div>

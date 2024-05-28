@@ -35,20 +35,20 @@ active
     <div class="button-container mr-auto ml-auto">
       <div class="button-container mr-auto ml-auto">
         <button class="btn btn-simple btn-link btn-icon">
-          <a href="tel: {{estudiante.telefono}}"><i class="fa fa-phone" style="width: 35px; font-size: 35px;"></i></a>
+          <a id="id_telefono" href="tel: {{estudiante.telefono}}"><i class="fa fa-phone" style="width: 35px; font-size: 35px;"></i></a>
         </button>
         <button class="btn btn-simple btn-link btn-icon">
-          <a href="https://api.whatsapp.com/send?phone=52{{ estudiante.whatsapp }}"><i class="fab fa-whatsapp"></i></a>
+          <a id="id_whatsapp" href="https://api.whatsapp.com/send?phone=52{{ estudiante.whatsapp }}"><i class="fab fa-whatsapp"></i></a>
         </button>
         <button class="btn btn-simple btn-link btn-icon">
-          <a href="mailto: {{estudiante.correo}}"><i class="fa fa-envelope"></i></a>
+          <a id="id_correo" href="mailto: {{estudiante.correo}}"><i class="fa fa-envelope"></i></a>
         </button>
       </div>
     </div>
     <div class="button-container mr-auto ml-auto">
       <form method="post">
         <span>
-          <a href="{% url 'editar_perfil_estudiante' %}" class="btn btn-info">Editar Perfil</a>
+          <a id="btn-editar" href="{% url 'editar_perfil_estudiante' %}" class="btn btn-info">Editar Perfil</a>
         </span>
       </form>
     </div>
