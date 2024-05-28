@@ -70,4 +70,4 @@ Característica: Modificar de estudiante
     Y escribe sus preferencias de búsqueda "Preferencias de prueba"
     Y escribe sus pasatiempos "Pasatiempos nuevos"    
     Cuando presiona el botón Guardar cambios
-    Entonces ve un mensaje de error "Ya existe un usuario con ese correo electrónico y tiene una contraseña asociada."
+    Entonces ve un mensaje de error "Ya existe un usuario con ese correo electrónico."

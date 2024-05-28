@@ -68,4 +68,4 @@ Característica: Registro de estudiante
     Y escribe sus preferencias de búsqueda "Preferencias de prueba"
     Y escribe sus pasatiempos "Pasatiempos de prueba"  
     Cuando presiona el botón Siguiente
-    Entonces ve un mensaje de error "Ya existe un usuario con ese correo electrónico y tiene una contraseña asociada."
+    Entonces ve un mensaje de error "Ya existe un usuario con ese correo electrónico."
