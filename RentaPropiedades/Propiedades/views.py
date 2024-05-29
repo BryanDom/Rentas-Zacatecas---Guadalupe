@@ -61,10 +61,10 @@ def nueva_propiedad(request):
             colonia = request.POST.get('colonia')
             municipio = request.POST.get('municipio')
 
+            ubicacion = f'{calle} {numero}, {colonia}, {municipio}'
             # Verificar si ya existe una propiedad con los mismos datos
             existing_property = Propiedad.objects.filter(
-                ubicacion__icontains=f'{calle} {
-                    numero}, {colonia}, {municipio}'
+                ubicacion__icontains=ubicacion
             ).exists()
 
             if existing_property:
@@ -80,8 +80,8 @@ def nueva_propiedad(request):
                     commit=False)  # No guardamos todavía
 
                 # Concatenamos la ubicación
-                propiedad.ubicacion = f'{calle} {
-                    numero}, {colonia}, {municipio}'
+                ubicacion = f'{calle} {numero}, {colonia}, {municipio}'
+                propiedad.ubicacion = ubicacion
                 propiedad.arrendador = request.user.arrendador
 
                 propiedad.save()

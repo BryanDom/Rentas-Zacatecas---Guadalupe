@@ -15,9 +15,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Estudiante_Interesado',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('estudiante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='interesado_estudiante', to='perfiles.estudiante', verbose_name='Estudiante')),
-                ('propiedad', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='interesado_propiedad', to='Propiedades.propiedad', verbose_name='Propiedad')),
+                ('id', models.BigAutoField(auto_created=True,
+                                           primary_key=True,
+                                           serialize=False,
+                                           verbose_name='ID')),
+                ('estudiante', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='interesado_estudiante',
+                    to='perfiles.estudiante',
+                    verbose_name='Estudiante')),
+                ('propiedad', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='interesado_propiedad',
+                    to='Propiedades.propiedad',
+                    verbose_name='Propiedad')),
             ],
         ),
     ]

@@ -6,7 +6,8 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("Propiedades", "0003_imagenpropiedad_nombre_propiedad_imagen_and_more"),
+        ("Propiedades",
+         "0003_imagenpropiedad_nombre_propiedad_imagen_and_more"),
     ]
 
     operations = [

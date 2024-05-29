@@ -27,7 +27,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='propiedad',
             name='arrendador',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='perfiles.arrendador', verbose_name='Arrendador'),
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='perfiles.arrendador', verbose_name='Arrendador'),
             preserve_default=False,
         ),
     ]

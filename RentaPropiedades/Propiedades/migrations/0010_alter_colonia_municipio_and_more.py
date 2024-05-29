@@ -15,24 +15,42 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='colonia',
             name='municipio',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Propiedades.municipio', verbose_name='Municipio'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='Propiedades.municipio',
+                verbose_name='Municipio'),
         ),
         migrations.AlterField(
             model_name='imagenpropiedad',
             name='propiedad',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Propiedades.propiedad', verbose_name='Propiedad'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='Propiedades.propiedad',
+                verbose_name='Propiedad'),
         ),
         migrations.AlterField(
             model_name='propiedad',
             name='arrendador',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='perfiles.arrendador', verbose_name='Arrendador'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='perfiles.arrendador',
+                verbose_name='Arrendador'),
         ),
         migrations.CreateModel(
             name='Favorito',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('estudiante', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='favoritos_estudiante', to='perfiles.estudiante', verbose_name='Estudiante')),
-                ('propiedad', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='favoritos_propiedad', to='Propiedades.propiedad', verbose_name='Propiedad')),
+                ('id', models.AutoField(primary_key=True,
+                                        serialize=False)),
+                ('estudiante', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='favoritos_estudiante',
+                    to='perfiles.estudiante',
+                    verbose_name='Estudiante')),
+                ('propiedad', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='favoritos_propiedad',
+                    to='Propiedades.propiedad',
+                    verbose_name='Propiedad')),
             ],
         ),
     ]

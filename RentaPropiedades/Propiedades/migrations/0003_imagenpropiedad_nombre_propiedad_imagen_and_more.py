@@ -39,13 +39,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="imagenpropiedad",
             name="imagen",
-            field=models.ImageField(upload_to=Propiedades.validators.directory_path),
+            field=models.ImageField(
+                upload_to=Propiedades.validators.directory_path),
         ),
         migrations.AlterField(
             model_name="imagenpropiedad",
             name="propiedad",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="Propiedades.propiedad"
+                on_delete=django.db.models.deletion.CASCADE,
+                to="Propiedades.propiedad"
             ),
         ),
     ]

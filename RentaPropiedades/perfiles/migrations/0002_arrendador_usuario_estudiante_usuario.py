@@ -16,13 +16,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='arrendador',
             name='usuario',
-            field=models.OneToOneField(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Usuario'),
+            field=models.OneToOneField(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name='Usuario'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='estudiante',
             name='usuario',
-            field=models.OneToOneField(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Usuario'),
+            field=models.OneToOneField(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name='Usuario'),
             preserve_default=False,
         ),
     ]

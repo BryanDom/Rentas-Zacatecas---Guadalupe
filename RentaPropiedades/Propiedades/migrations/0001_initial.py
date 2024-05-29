@@ -15,23 +15,41 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Propiedad',
             fields=[
-                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('id', models.IntegerField(primary_key=True,
+                                           serialize=False)),
                 ('descripcion', models.CharField(max_length=100)),
-                ('precio', models.DecimalField(decimal_places=10, max_digits=19)),
-                ('tipo', models.IntegerField(choices=[(1, 'Casa'), (2, 'Departamento'), (3, 'Cuarto')])),
+                ('precio', models.DecimalField(decimal_places=10,
+                                               max_digits=19)),
+                ('tipo', models.IntegerField(
+                    choices=[(1, 'Casa'),
+                             (2, 'Departamento'),
+                             (3, 'Cuarto')])),
                 ('ubicacion', models.CharField(max_length=100)),
-                ('serviciosIncluidos', models.BooleanField(default=False)),
-                ('nombreArrendador', models.CharField(max_length=100)),
-                ('TelefonoArrendador', models.CharField(max_length=10)),
-                ('correoArrendador', models.CharField(max_length=100)),
+                ('serviciosIncluidos', models.BooleanField(
+                    default=False)),
+                ('nombreArrendador', models.CharField(
+                    max_length=100)),
+                ('TelefonoArrendador', models.CharField(
+                    max_length=10)),
+                ('correoArrendador', models.CharField(
+                    max_length=100)),
             ],
         ),
         migrations.CreateModel(
             name='ImagenPropiedad',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('imagen', models.ImageField(blank=True, null=True, upload_to='imagenes', verbose_name='imagen')),
-                ('propiedad', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='Propiedades.propiedad', verbose_name='Propiedad')),
+                ('id', models.BigAutoField(auto_created=True,
+                                           primary_key=True,
+                                           serialize=False,
+                                           verbose_name='ID')),
+                ('imagen', models.ImageField(blank=True,
+                                             null=True,
+                                             upload_to='imagenes',
+                                             verbose_name='imagen')),
+                ('propiedad', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING,
+                    to='Propiedades.propiedad',
+                    verbose_name='Propiedad')),
             ],
         ),
     ]

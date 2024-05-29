@@ -6,7 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('perfiles', '0003_alter_favorito_estudiante_alter_favorito_propiedad'),
+        ('perfiles',
+         '0003_alter_favorito_estudiante_alter_favorito_propiedad'),
     ]
 
     operations = [

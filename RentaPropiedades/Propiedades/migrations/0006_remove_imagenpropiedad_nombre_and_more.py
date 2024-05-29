@@ -27,7 +27,8 @@ class Migration(migrations.Migration):
             model_name="imagenpropiedad",
             name="imagen",
             field=models.ImageField(
-                blank=True, null=True, upload_to="imagenes", verbose_name="imagen"
+                blank=True, null=True, upload_to="imagenes",
+                verbose_name="imagen"
             ),
         ),
         migrations.AlterField(

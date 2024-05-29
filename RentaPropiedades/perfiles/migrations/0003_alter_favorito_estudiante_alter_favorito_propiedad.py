@@ -15,11 +15,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='favorito',
             name='estudiante',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='perfiles.estudiante', verbose_name='Estudiante'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='perfiles.estudiante',
+                verbose_name='Estudiante'),
         ),
         migrations.AlterField(
             model_name='favorito',
             name='propiedad',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Propiedades.propiedad', verbose_name='Propiedad'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='Propiedades.propiedad',
+                verbose_name='Propiedad'),
         ),
     ]
