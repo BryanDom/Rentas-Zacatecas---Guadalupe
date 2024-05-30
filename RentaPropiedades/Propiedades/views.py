@@ -481,6 +481,8 @@ def filtrarColonia(propiedades, colonia, municipio):
         else:
             return propiedades.filter(
                 ubicacion__icontains=f'{municipio}')
+    else:
+        return propiedades
 
 
 def colocarImagenes(propiedades):

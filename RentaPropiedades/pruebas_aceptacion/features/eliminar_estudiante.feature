@@ -12,4 +12,4 @@ Característica: Eliminar perfil de estudiante
     Y presiona el botón Eliminar Perfil
     Y puede ver el mensaje "¿Estás seguro de eliminar tu perfil?"
     Cuando presiona el botón Eliminar Perfil
-    Entonces puede ver el mensaje "Usuario eliminado con exito".
+    Entonces puede ver el mensaje "¿No tienes cuenta? Crea una".

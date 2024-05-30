@@ -21,6 +21,6 @@ def step_impl(context, mensaje):
 @then(u'puede ver el mensaje "{mensaje}".')
 def step_impl(context, mensaje):
     time.sleep(1)
-    mensaje_exito = context.driver.find_element(By.XPATH, "/html/body/div/form/div[1]").text
+    mensaje_exito = context.driver.find_element(By.XPATH, "/html/body/div/div[2]/p/strong").text
     assert mensaje in mensaje_exito
     
