@@ -8,7 +8,7 @@ Característica: Registro de arrendador
     Y presiona el botón Crear cuenta arrendador
     Y escribe su nombre "Luis", sus apellidos "López Pérez", su edad "40"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\arrendador.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\arrendador.jpg"
     Y escribe su ocupación "Abogado"
     Y escribe su teléfono "1234567890"
     Y escribe su WhatsApp "1234567890"
@@ -28,7 +28,7 @@ Característica: Registro de arrendador
     Y presiona el botón Crear cuenta arrendador
     Y escribe su nombre "Luis", sus apellidos "López Pérez", su edad "40"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\estudiante.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\estudiante.jpg"
     Y escribe su ocupación "Abogado"
     Y escribe su teléfono "1234567890"
     Y escribe su WhatsApp "1234567890"
@@ -43,7 +43,7 @@ Característica: Registro de arrendador
     Y presiona el botón Crear cuenta arrendador
     Y escribe su nombre "Luis", sus apellidos "López Pérez", su edad "40"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\estudiante.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\estudiante.jpg"
     Y escribe su ocupación "Abogado"
     Y escribe su teléfono "1234567890"
     Y escribe su WhatsApp "1234567890"
@@ -57,7 +57,7 @@ Característica: Registro de arrendador
     Y presiona el botón Crear cuenta arrendador
     Y escribe su nombre "Luis", sus apellidos "López Pérez", su edad "40"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\estudiante.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\estudiante.jpg"
     Y escribe su ocupación "Abogado"
     Y no escribe su teléfono
     Y escribe su WhatsApp "1234567890"

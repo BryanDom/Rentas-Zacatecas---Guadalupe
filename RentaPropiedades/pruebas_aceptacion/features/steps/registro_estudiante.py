@@ -2,6 +2,11 @@ from behave import when, given, then
 from selenium import webdriver
 from selenium.webdriver.common.by import By #importar clase by
 import time
+import os
+
+# Ruta base del proyecto
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
 
 @given(u'que el estudiante ingresa a la url "{url}"')
 def step_impl(context, url):
@@ -51,11 +56,13 @@ def step_impl(context, sexo):
 @given(u'selecciona su foto de perfil "{foto}"')
 def step_impl(context, foto):
     time.sleep(1)
+    ruta_imagen = os.path.join(BASE_DIR, foto.replace("\\", os.sep))
     # Encontrar el elemento de entrada de archivo
     upload_input = context.driver.find_element(By.ID, 'id_foto_perfil')
-
+    
+    print(f"Ruta de imagen construida: {ruta_imagen}")  # Imprimir la ruta para depuración
     # Enviar la ruta absoluta al elemento de entrada de archivo
-    upload_input.send_keys(foto)
+    upload_input.send_keys(ruta_imagen)
     
     # Esperar un momento para que el archivo se cargue
     time.sleep(2)

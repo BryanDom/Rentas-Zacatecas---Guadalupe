@@ -8,7 +8,7 @@ Característica: Registro de estudiante
     Y presiona el botón Crear cuenta estudiante
     Y escribe su nombre "Estudiante1", sus apellidos "Estudiante Estudiante", su edad "24"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\estudiante.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\estudiante.jpg"
     Y escribe su universidad actual "Universidad Ejemplo"
     Y escribe su teléfono "1234567890"
     Y escribe su WhatsApp "1234567890"
@@ -29,7 +29,7 @@ Característica: Registro de estudiante
     Y presiona el botón Crear cuenta estudiante
     Y escribe su nombre "Estudiante1", sus apellidos "Estudiante Estudiante", su edad "24"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\estudiante.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\estudiante.jpg"
     Y escribe su universidad actual "Universidad Ejemplo"
     Y escribe su teléfono "1234567890"
     Y escribe su WhatsApp "1234567890"
@@ -44,7 +44,7 @@ Característica: Registro de estudiante
     Y presiona el botón Crear cuenta estudiante
     Y escribe su nombre "Estudiante1", sus apellidos "Estudiante Estudiante", su edad "24"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\estudiante.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\estudiante.jpg"
     Y escribe su universidad actual "Universidad Ejemplo"
     Y escribe su teléfono "1234567890"
     Y escribe su WhatsApp "1234567890"
@@ -59,7 +59,7 @@ Característica: Registro de estudiante
     Y presiona el botón Crear cuenta estudiante
     Y escribe su nombre "Estudiante1", sus apellidos "Estudiante Estudiante", su edad "24"
     Y selecciona su sexo "M"
-    Y selecciona su foto de perfil "C:\Users\booco\Documents\sistema-rentas-zacatecas-guadalupe\RentaPropiedades\pruebas_aceptacion\imagenes_pruebas\estudiante.jpg"
+    Y selecciona su foto de perfil "imagenes_pruebas\estudiante.jpg"
     Y escribe su universidad actual "Universidad Ejemplo"
     Y no escribe su teléfono
     Y escribe su WhatsApp "1234567890"
