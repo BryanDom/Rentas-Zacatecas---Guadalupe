@@ -77,9 +77,6 @@ class CustomLoginView(LoginView):
                 # Guarda el ID del usuario en la sesión
                 self.request.session['user_id'] = user.id
                 return response
-            else:
-                messages.warning(request, 'Contraseña incorrecta :(')
-                return self.form_invalid(form)
         else:
             username = form.cleaned_data.get('username')
             # password = form.cleaned_data.get('password')

@@ -1,5 +1,6 @@
 from django.test import TestCase
 from perfiles.forms import FormEstudiante, FormArrendador
+from Propiedades.forms import FormResena
 
 class TestFormArrendador(TestCase):
     def setUp(self):
@@ -192,3 +193,48 @@ class TestFormEstudiante(TestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('pasatiempos', form.errors)
     
+class TestFormResena(TestCase):
+
+    def setUp(self):
+        # Inicializa datos válidos para el formulario antes de cada prueba
+        self.data = {
+            'descripcion': 'Esta es una reseña de prueba',
+            'calificacion': 4
+        }
+
+    def test_descripcion_requerida(self):
+        # Prueba que el campo 'descripcion' es obligatorio
+        self.data['descripcion'] = ''
+        form = FormResena(data=self.data)
+        self.assertFalse(form.is_valid())
+        # Verifica que el error de 'descripcion' está presente en los errores del formulario
+        self.assertIn('descripcion', form.errors)
+
+    def test_calificacion_requerida(self):
+        # Prueba que el campo 'calificacion' es obligatorio
+        self.data['calificacion'] = ''
+        form = FormResena(data=self.data)
+        self.assertFalse(form.is_valid())
+        # Verifica que el error de 'calificacion' está presente en los errores del formulario
+        self.assertIn('calificacion', form.errors)
+
+    def test_calificacion_fuera_de_rango_menor(self):
+        # Prueba que la calificación no puede ser menor que 1
+        self.data['calificacion'] = 0
+        form = FormResena(data=self.data)
+        self.assertFalse(form.is_valid())
+        # Verifica que el error de 'calificacion' está presente en los errores del formulario
+        self.assertIn('calificacion', form.errors)
+    
+    def test_calificacion_fuera_de_rango_mayor(self):
+        # Prueba que la calificación no puede ser mayor que 5
+        self.data['calificacion'] = 6
+        form = FormResena(data=self.data)
+        self.assertFalse(form.is_valid())
+        # Verifica que el error de 'calificacion' está presente en los errores del formulario
+        self.assertIn('calificacion', form.errors)
+
+    def test_formulario_valido(self):
+        # Prueba que el formulario es válido con los datos correctos
+        form = FormResena(data=self.data)
+        self.assertTrue(form.is_valid())
