@@ -24,17 +24,22 @@
                 resize: vertical; /* Permite redimensionar verticalmente */
             }
         }
+
+        .error-message {
+            color: red;
+            display: none; /* Oculto por defecto */
+        }
     </style>
 {% endblock estilos %}
     
 {% block contenido %}
 <h1>Agregar Reseña</h1><br>
-    <form method="post">
+    <form method="post" id="resena-form">
         {% csrf_token %}
-        <strong>{{form.descripcion.label_tag}}</strong>
+        <strong>{{ form.descripcion.label_tag }}</strong>
         {{ form.descripcion }}
         <br>
-        <strong>{{form.calificacion.label_tag}}</strong>
+        <strong>{{ form.calificacion.label_tag }}</strong>
         <div class="contenedor_estrellas" id="contenedor-estrellas">
             {% for i in rango_estrellas %}
                 <span class="estrella" data-valor="{{ i }}">
@@ -46,8 +51,17 @@
                 </span>
             {% endfor %}
             <!-- Campo oculto para la calificación -->
-            {{ form.calificacion }}
+            <select name="calificacion" id="id_calificacion" style="display: none;">
+                <option value="">-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
         </div>
+        <br>
+        <span class="error-message" id="calificacion-error">Por favor, selecciona una calificación.</span>
         <br>
         <span>
             <a href="{% url 'lista_resenas' propiedad_id %}" class="btn btn-warning">Cancelar</a>
@@ -59,13 +73,12 @@
     document.addEventListener('DOMContentLoaded', function () {
         const estrellas = document.querySelectorAll('.estrella');
         const inputCalificacion = document.getElementById('id_calificacion');
-
-        // Ocultar el campo de calificación al agregar una reseña
-        inputCalificacion.style.display = 'none';
+        const form = document.getElementById('resena-form');
+        const errorMessage = document.getElementById('calificacion-error');
 
         estrellas.forEach(function (estrella) {
             estrella.addEventListener('click', function () {
-                const valorEstrella = parseInt(estrella.dataset.valor);
+                const valorEstrella = estrella.dataset.valor;
 
                 // Actualizar el campo oculto con la nueva calificación
                 inputCalificacion.value = valorEstrella;
@@ -78,7 +91,17 @@
                         e.innerHTML = '<i class="far fa-star" style="font-size: 2em;"></i>';
                     }
                 });
+
+                // Ocultar el mensaje de error
+                errorMessage.style.display = 'none';
             });
+        });
+
+        form.addEventListener('submit', function (event) {
+            if (inputCalificacion.value === "") {
+                event.preventDefault(); // Evita que el formulario se envíe
+                errorMessage.style.display = 'block'; // Muestra el mensaje de error
+            }
         });
     });
 </script>
