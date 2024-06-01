@@ -7,6 +7,7 @@ import time
 @given(u'que el arrendador ingresa a la url "{url}"')
 def step_impl(context, url):
     context.driver = webdriver.Chrome()
+    context.driver.maximize_window()
     context.driver.get(url)
 
 

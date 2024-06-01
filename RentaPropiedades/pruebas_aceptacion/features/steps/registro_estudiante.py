@@ -11,6 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 @given(u'que el estudiante ingresa a la url "{url}"')
 def step_impl(context, url):
     context.driver = webdriver.Chrome()
+    context.driver.maximize_window()
     context.driver.get(url)
 
 
