@@ -35,14 +35,14 @@ active
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{propiedad.ubicacion}}</h5>
-              <p class="card-text">{{propiedad.get_tipo_display}}</p>
+              <p class="card-text" id="tipo_prop">{{propiedad.get_tipo_display}}</p>
             </div>
           </div>
         </div>
     </div>
       <div>
-        <a href="{% url 'detalle_propiedad' propiedad.id %}" class="btn_redondo btn btn-primary">Detalles</a>
-        <a href="{% url 'editar_propiedad' propiedad.id %}" style="border-radius: 10px; margin: 10px;" class="btn btn-success" >
+        <a href="{% url 'detalle_propiedad' propiedad.id %}" class="btn_redondo btn btn-primary" id="btn_detalles">Detalles</a>
+        <a href="{% url 'editar_propiedad' propiedad.id %}" style="border-radius: 10px; margin: 10px;" class="btn btn-success" id="id_editar">
           <i class="fas fa-pencil-alt" style="font-size: 2em;"></i> 
         </a>
         <a href="{% url 'confirmacion_eliminacion_propiedad' propiedad.id %}" style="border-radius: 10px; margin: 10px;" class="btn btn-danger" >
