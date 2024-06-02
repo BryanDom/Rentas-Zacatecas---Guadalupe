@@ -2,10 +2,10 @@ from behave import when, given, then
 from selenium.webdriver.common.by import By #importar clase by
 import time
 
-@given(u'presiona el botón de lista de propiedades')
-def step_impl(context):
-    context.driver.find_element(By.ID, 'btn-propiedades').click()
-    time.sleep(2)
+# @given(u'presiona el botón de lista de propiedades')
+# def step_impl(context):
+#     context.driver.find_element(By.ID, 'btn-propiedades').click()
+#     time.sleep(2)
 
 
 @given(u'presiona el boton detalles de la propiedad "{datos_propiedad}"')
