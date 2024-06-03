@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User, Group
 from perfiles.models import Arrendador, Estudiante
-from Propiedades.models import Propiedad, ImagenPropiedad, Resena
+from Propiedades.models import Propiedad, ImagenPropiedad, Resena, Favorito, Estudiante_Interesado
 from perfiles.forms import FormArrendador, FormEstudiante
 
 class ArrendadorCreateViewTests(TestCase):
@@ -804,3 +804,86 @@ class LoginViewTests(TestCase):
 
         # Verificar que el bloque else se ejecuta
         self.assertIn('Contraseña incorrecta :(', response.content.decode())
+        
+class PropiedadViewTests(TestCase):
+    
+    def setUp(self):
+        # Crear grupo de estudiante
+        self.group_estudiante, created = Group.objects.get_or_create(name='estudiante')
+        # Crear usuario estudiante
+        self.user = User.objects.create_user(
+            username='joseguardado@gmail.com',
+            password='testpassword'
+        )
+        self.user.groups.add(self.group_estudiante)
+        self.estudiante = Estudiante.objects.create(
+            usuario=self.user,
+            nombre='José',
+            apellidos='Guardado',
+            edad=22,
+            universidad_actual='Ingeniería',
+            telefono='0987654321',
+            whatsapp='1122334455',
+            correo='joseguardado@gmail.com',
+            preferencias_busqueda='Cuartos de estudiantes',
+            pasatiempos='Música, pintura, películas de terror.',
+            sexo='M',
+            foto_perfil='perfiles/1144760.png'
+        )
+
+        # Crear arrendador y propiedad
+        self.group_arrendador, created = Group.objects.get_or_create(name='arrendador')
+        self.user_arrendador = User.objects.create_user(
+            username='luisperez@gmail.com',
+            password='testpassword'
+        )
+        self.user_arrendador.groups.add(self.group_arrendador)
+        self.arrendador = Arrendador.objects.create(
+            usuario=self.user_arrendador,
+            nombre='Luis',
+            apellidos='Pérez',
+            edad=40,
+            ocupacion='Abogado',
+            telefono='1234567890',
+            whatsapp='9876543210',
+            correo='luisperez@gmail.com',
+            preferencias_arrendatarios='Gente honesta',
+            sexo='M',
+            foto_perfil='perfiles/1144760.png'
+        )
+
+        self.propiedad = Propiedad.objects.create(
+            descripcion='Bonita',
+            precio=2000,
+            tipo=1,
+            ubicacion='Calle florida colinas',
+            serviciosIncluidos=True,
+            arrendador=self.arrendador
+        )
+
+        self.client.login(username='joseguardado@gmail.com', password='testpassword')
+        
+    def test_acceso_vista_detalles_propiedad(self):
+        response = self.client.get(reverse('detalle_propiedad', args=[self.propiedad.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'detalles_propiedad.html')
+        
+    def test_acceso_vista_detalles_arrendador(self):
+        response = self.client.get(reverse('detalles_arrendador', args=[self.propiedad.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'detalles_arrendador.html')
+        
+    def test_acceso_vista_lista_interesados(self):
+        response = self.client.get(reverse('lista_interesados', args=[self.propiedad.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'lista_interesados.html')
+        
+    def test_agregar_propiedad_favoritos(self):
+        response = self.client.get(reverse('agregaraListaFavoritos', args=[self.propiedad.id]))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Favorito.objects.count(), 1)
+        
+    def test_agregar_interes_propiedad(self):
+        response = self.client.get(reverse('indicar_interes', args=[self.propiedad.id]))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Estudiante_Interesado.objects.count(), 1)
