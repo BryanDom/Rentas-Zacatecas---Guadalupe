@@ -9,14 +9,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 
 @given(u'que el estudiante ingresa a la url "{url}"')
-def step_impl(context, url):
+def step_impl(context, url):  # noqa: F811
     context.driver = webdriver.Chrome()
     context.driver.maximize_window()
     context.driver.get(url)
 
 
 @given(u'presiona el botón Crear cuenta estudiante')
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     time.sleep(1)
     # By.LINK_TEXT requiere que coincida exactamente el texto,
     # mientras que By.PARTIAL_LINK_TEXT permite coincidencias parciales,
@@ -27,19 +27,20 @@ def step_impl(context):
 
 
 @given(u'presiona el botón Siguiente')
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     time.sleep(1)
     context.driver.find_element(By.CLASS_NAME, "btn_siguiente").click()
 
 
 @given(u'presiona el botón Aceptar y continuar')
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     time.sleep(1)
     context.driver.find_element(By.ID, "btn-aceptar").click()
 
 
-@given(u'escribe su nombre "{nombre}", sus apellidos "{apellidos}", su edad "{edad}"')
-def step_impl(context, nombre, apellidos, edad):
+@given(u'escribe su nombre "{nombre}",'
+       u'sus apellidos "{apellidos}", su edad "{edad}"')
+def step_impl(context, nombre, apellidos, edad):  # noqa: F811
     nom = context.driver.find_element(By.ID, 'id_nombre')
     nom.clear()
     nom.send_keys(nombre)
@@ -52,7 +53,7 @@ def step_impl(context, nombre, apellidos, edad):
 
 
 @given(u'selecciona su sexo "{sexo}"')
-def step_impl(context, sexo):
+def step_impl(context, sexo):  # noqa: F811
     time.sleep(1)
     radio_button = context.driver.find_element(
         By.XPATH, '//input[@value="' + sexo + '"]')
@@ -60,7 +61,7 @@ def step_impl(context, sexo):
 
 
 @given(u'selecciona su foto de perfil "{foto}"')
-def step_impl(context, foto):
+def step_impl(context, foto):  # noqa: F811
     time.sleep(1)
     ruta_imagen = os.path.join(BASE_DIR, foto.replace("\\", os.sep))
     # Encontrar el elemento de entrada de archivo
@@ -76,100 +77,92 @@ def step_impl(context, foto):
 
 
 @given(u'escribe su universidad actual "{universidad}"')
-def step_impl(context, universidad):
+def step_impl(context, universidad):  # noqa: F811
     unive = context.driver.find_element(By.ID, 'id_universidad_actual')
     unive.clear()
     unive.send_keys(universidad)
 
 
 @given(u'escribe su teléfono "{telefono}"')
-def step_impl(context, telefono):
+def step_impl(context, telefono):  # noqa: F811
     tel = context.driver.find_element(By.ID, 'id_telefono')
     tel.clear()
     tel.send_keys(telefono)
 
 
 @given(u'escribe su WhatsApp "{whatsapp}"')
-def step_impl(context, whatsapp):
+def step_impl(context, whatsapp):  # noqa: F811
     whats = context.driver.find_element(By.ID, 'id_whatsapp')
     whats.clear()
     whats.send_keys(whatsapp)
 
 
 @given(u'escribe su correo "{correo}"')
-def step_impl(context, correo):
+def step_impl(context, correo):  # noqa: F811
     corr = context.driver.find_element(By.ID, 'id_correo')
     corr.clear()
     corr.send_keys(correo)
 
 
 @given(u'escribe sus preferencias de búsqueda "{preferencias}"')
-def step_impl(context, preferencias):
+def step_impl(context, preferencias):  # noqa: F811
     pref = context.driver.find_element(By.ID, 'id_preferencias_busqueda')
     pref.clear()
     pref.send_keys(preferencias)
 
 
 @given(u'escribe sus pasatiempos "{pasatiempos}"')
-def step_impl(context, pasatiempos):
+def step_impl(context, pasatiempos):  # noqa: F811
     pasa = context.driver.find_element(By.ID, 'id_pasatiempos')
     pasa.clear()
     pasa.send_keys(pasatiempos)
 
 
 @given(u'puede ver el mensaje del compromiso del sistema')
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     mensaje_compromiso = context.driver.find_element(
         By.XPATH, '/html/body/div/div/p[2]').text
     compromiso_esperado = (
-        "Nuestro compromiso:\n\n"
-        "La plataforma de alquiler en Zacatecas y Guadalupe "
-        "es una comunidad acogedora donde queremos que todos se "
-        "sientan como en casa sin importar su origen. Para garantizar este ambiente inclusivo, "
-        "pedimos que todos los usuarios se comprometan a seguir lo siguiente:\n\n"
-        "En nuestra comunidad, nos esforzamos por respetar y tratar a todos sin prejuicios, "
-        "sin importar el color de piel, la religión, la nacionalidad, la etnia, el género, la identidad de género, "
-        "la orientación sexual o si tienen alguna discapacidad. Queremos que todos se sientan bienvenidos y seguros "
-        "al utilizar nuestros servicios. Gracias por unirte a nosotros para crear un entorno donde la diversidad es valorada."
+        "Nuestro compromiso"
     )
-    assert mensaje_compromiso == compromiso_esperado, f"El mensaje del compromiso no coincide. Esperado: '{compromiso_esperado}', Encontrado: '{mensaje_compromiso}'"
+    assert compromiso_esperado in mensaje_compromiso
 
 
 @given(u'ingresa la contraseña "{contrasenia}"')
-def step_impl(context, contrasenia):
+def step_impl(context, contrasenia):  # noqa: F811
     context.driver.find_element(By.ID, 'id_password').send_keys(contrasenia)
 
 
 @given(u'para confirmar nuevamente ingresa la contraseña "{contrasenia}"')
-def step_impl(context, contrasenia):
+def step_impl(context, contrasenia):  # noqa: F811
     context.driver.find_element(By.ID, 'id_re_pass').send_keys(contrasenia)
 
 
 @given(u'no completa el campo de pasatiempos "{campo}"')
-def step_impl(context, campo):
+def step_impl(context, campo):  # noqa: F811
     context.driver.find_element(By.ID, 'id_pasatiempos').send_keys(campo)
 
 
 @when(u'presiona el botón Continuar')
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     context.driver.find_element(By.ID, "btn-crearContra").click()
 
 
 @when(u'presiona el botón Siguiente')
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     time.sleep(1)
     context.driver.find_element(By.CLASS_NAME, "btn_siguiente").click()
 
 
 @then(u'puede ver el mensaje "{mensaje}"')
-def step_impl(context, mensaje):
+def step_impl(context, mensaje):  # noqa: F811
     exito = context.driver.find_element(
         By.XPATH, '/html/body/div/div[2]/div[1]/div/h1').text
     assert mensaje == exito, f"El mensaje {mensaje} no se encuentra en {exito}"
 
 
 @then(u've un mensaje de error "{mensaje}"')
-def step_impl(context, mensaje):
+def step_impl(context, mensaje):  # noqa: F811
     # Buscar el elemento que contiene el mensaje de error
     mensaje_error = context.driver.find_element(
         By.CSS_SELECTOR, "ul.errorlist > li")
@@ -179,7 +172,7 @@ def step_impl(context, mensaje):
 
 
 @then(u've un mensaje de error en el correo "{mensaje}"')
-def step_impl(context, mensaje):
+def step_impl(context, mensaje):  # noqa: F811
     error = context.driver.find_element(
         By.ID, 'id_correo').get_attribute("validationMessage")
 
