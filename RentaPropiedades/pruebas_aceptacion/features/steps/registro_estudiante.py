@@ -17,7 +17,7 @@ def step_impl(context, url):  # noqa: F811
 
 @given(u'presiona el botón Crear cuenta estudiante')
 def step_impl(context):  # noqa: F811
-    time.sleep(1)
+    time.sleep(2)
     # By.LINK_TEXT requiere que coincida exactamente el texto,
     # mientras que By.PARTIAL_LINK_TEXT permite coincidencias parciales,
     # lo cual es más adecuado para este caso dado que el texto completo del
@@ -28,19 +28,20 @@ def step_impl(context):  # noqa: F811
 
 @given(u'presiona el botón Siguiente')
 def step_impl(context):  # noqa: F811
-    time.sleep(1)
+    time.sleep(2)
     context.driver.find_element(By.CLASS_NAME, "btn_siguiente").click()
 
 
 @given(u'presiona el botón Aceptar y continuar')
 def step_impl(context):  # noqa: F811
-    time.sleep(1)
+    time.sleep(2)
     context.driver.find_element(By.ID, "btn-aceptar").click()
 
 
 @given(u'escribe su nombre "{nombre}", '
        u'sus apellidos "{apellidos}", su edad "{edad}"')
 def step_impl(context, nombre, apellidos, edad):  # noqa: F811
+    time.sleep(2)
     nom = context.driver.find_element(By.ID, 'id_nombre')
     nom.clear()
     nom.send_keys(nombre)
@@ -54,7 +55,7 @@ def step_impl(context, nombre, apellidos, edad):  # noqa: F811
 
 @given(u'selecciona su sexo "{sexo}"')
 def step_impl(context, sexo):  # noqa: F811
-    time.sleep(1)
+    time.sleep(2)
     radio_button = context.driver.find_element(
         By.XPATH, '//input[@value="' + sexo + '"]')
     radio_button.click()
@@ -62,7 +63,7 @@ def step_impl(context, sexo):  # noqa: F811
 
 @given(u'selecciona su foto de perfil "{foto}"')
 def step_impl(context, foto):  # noqa: F811
-    time.sleep(1)
+    time.sleep(2)
     ruta_imagen = os.path.join(BASE_DIR, foto.replace("\\", os.sep))
     # Encontrar el elemento de entrada de archivo
     upload_input = context.driver.find_element(By.ID, 'id_foto_perfil')
