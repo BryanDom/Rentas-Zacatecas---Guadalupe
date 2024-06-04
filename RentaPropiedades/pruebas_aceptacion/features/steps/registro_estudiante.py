@@ -38,7 +38,7 @@ def step_impl(context):  # noqa: F811
     context.driver.find_element(By.ID, "btn-aceptar").click()
 
 
-@given(u'escribe su nombre "{nombre}",'
+@given(u'escribe su nombre "{nombre}", '
        u'sus apellidos "{apellidos}", su edad "{edad}"')
 def step_impl(context, nombre, apellidos, edad):  # noqa: F811
     nom = context.driver.find_element(By.ID, 'id_nombre')

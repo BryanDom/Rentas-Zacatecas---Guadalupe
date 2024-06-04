@@ -45,7 +45,7 @@ def step_impl(context):  # noqa: F811
     time.sleep(2)
 
 
-@then(u'podra ver que la propiedad con ID "{id_propiedad}"'
+@then(u'podra ver que la propiedad con ID "{id_propiedad}" '
       u'no debería estar en Mis propiedades')
 def step_impl(context, id_propiedad):  # noqa: F811
     propiedades = context.driver.find_elements(By.CLASS_NAME, 'property-item')
