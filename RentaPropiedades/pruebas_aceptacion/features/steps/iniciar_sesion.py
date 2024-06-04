@@ -1,4 +1,4 @@
-from behave import when, given, then
+from behave import when, then
 from selenium.webdriver.common.by import By  # importar clase by
 import time
 
