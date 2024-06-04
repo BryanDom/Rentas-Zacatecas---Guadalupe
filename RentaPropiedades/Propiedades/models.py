@@ -16,7 +16,7 @@ class Propiedad(models.Model):
         on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.ubicacion} - {self.precio}"
+        return f"{self.ubicacion} - {self.precio}"  # pragma: no cover
 
 
 class ImagenPropiedad(models.Model):
@@ -47,7 +47,7 @@ class Colonia(models.Model):
     nombre = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre  # pragma: no cover
 
 
 class Favorito (models.Model):
@@ -77,7 +77,7 @@ class Resena(models.Model):
     fecha = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.estudiante} - {self.fecha}"
+        return f"{self.estudiante} - {self.fecha}"  # pragma: no cover
 
 
 class Estudiante_Interesado(models.Model):

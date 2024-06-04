@@ -32,7 +32,7 @@ def editar_perfil_estudiante(request):
         if form.is_valid():
             form.save()
             return redirect('perfil_estudiante')
-    else: # pragma no cover
+    else:  # pragma no cover
         imagen_perfil_url = ""
         if estudiante.foto_perfil is not None:
             imagen_perfil_url = estudiante.foto_perfil.url
@@ -53,7 +53,7 @@ def editar_perfil_arrendador(request):
         if form.is_valid():
             form.save()
             return redirect('perfil_arrendador')
-    else: # pragma no cover
+    else:  # pragma no cover
         imagen_perfil_url = ""
         if arrendador.foto_perfil is not None:
             imagen_perfil_url = arrendador.foto_perfil.url

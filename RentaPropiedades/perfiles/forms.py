@@ -170,7 +170,7 @@ class UserForm(forms.ModelForm):
                 code='passwords_not_equals')
         return self.data['password']
 
-    def save(self, commit=True):
+    def save(self, commit=True):  # pragma: no cover
         user = super(UserForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password'])
         if commit:

@@ -22,6 +22,13 @@ class FormPropiedad(forms.ModelForm):
             ),
         }
 
+    def clean_precio(self):
+        precio = self.cleaned_data.get('precio')
+        if precio < 100:
+            raise forms.ValidationError(
+                'El precio debe ser mayor o igual a 100.')
+        return precio
+
 
 class FormImagenPropiedad(forms.ModelForm):
 

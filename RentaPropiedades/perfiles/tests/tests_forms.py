@@ -1,6 +1,7 @@
 from django.test import TestCase
 from perfiles.forms import FormEstudiante, FormArrendador
-from Propiedades.forms import FormResena
+from Propiedades.forms import FormResena, FormPropiedad
+
 
 class TestFormArrendador(TestCase):
     def setUp(self):
@@ -16,7 +17,6 @@ class TestFormArrendador(TestCase):
             'preferencias_arrendatarios': 'Gente honesta',
             'sexo': 'M'
         }
-
 
     def test_nombre_requerido(self):
         self.data['nombre'] = ''
@@ -192,7 +192,8 @@ class TestFormEstudiante(TestCase):
         form = FormEstudiante(data=self.data)
         self.assertFalse(form.is_valid())
         self.assertIn('pasatiempos', form.errors)
-    
+
+
 class TestFormResena(TestCase):
 
     def setUp(self):
@@ -207,7 +208,8 @@ class TestFormResena(TestCase):
         self.data['descripcion'] = ''
         form = FormResena(data=self.data)
         self.assertFalse(form.is_valid())
-        # Verifica que el error de 'descripcion' está presente en los errores del formulario
+        # Verifica que el error de 'descripcion' 
+        # está presente en los errores del formulario
         self.assertIn('descripcion', form.errors)
 
     def test_calificacion_requerida(self):
@@ -215,7 +217,8 @@ class TestFormResena(TestCase):
         self.data['calificacion'] = ''
         form = FormResena(data=self.data)
         self.assertFalse(form.is_valid())
-        # Verifica que el error de 'calificacion' está presente en los errores del formulario
+        # Verifica que el error de 'calificacion'
+        # está presente en los errores del formulario
         self.assertIn('calificacion', form.errors)
 
     def test_calificacion_fuera_de_rango_menor(self):
@@ -223,9 +226,10 @@ class TestFormResena(TestCase):
         self.data['calificacion'] = 0
         form = FormResena(data=self.data)
         self.assertFalse(form.is_valid())
-        # Verifica que el error de 'calificacion' está presente en los errores del formulario
+        # Verifica que el error de 'calificacion'
+        # está presente en los errores del formulario
         self.assertIn('calificacion', form.errors)
-    
+
     def test_calificacion_fuera_de_rango_mayor(self):
         # Prueba que la calificación no puede ser mayor que 5
         self.data['calificacion'] = 6
@@ -238,3 +242,47 @@ class TestFormResena(TestCase):
         # Prueba que el formulario es válido con los datos correctos
         form = FormResena(data=self.data)
         self.assertTrue(form.is_valid())
+
+
+class TestFormPropiedad(TestCase):
+    def setUp(self):
+        self.data = {
+            'descripcion': 'Departamento con 2 habitaciones,' +
+            'baño, cocina y sala',
+            'precio': 4300,
+            'tipo': '2',
+        }
+
+    def test_descripcion_requerida(self):
+        self.data['descripcion'] = ''
+        form = FormPropiedad(data=self.data)
+        self.assertIn('descripcion', form.errors)
+
+    def test_precio_requerido(self):
+        self.data['precio'] = ''
+        form = FormPropiedad(data=self.data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('precio', form.errors)
+
+    def test_tipo_propiedad_requerido(self):
+        self.data['tipo'] = ''
+        form = FormPropiedad(data=self.data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('tipo', form.errors)
+
+    def test_precio_menor_a_cien(self):
+        self.data['precio'] = 50
+        form = FormPropiedad(data=self.data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('precio', form.errors)
+
+    def test_formulario_valido(self):
+        form = FormPropiedad(data=self.data)
+        self.assertTrue(form.is_valid())
+
+    def test_descripcion_excede_caracteres(self):
+        descripcion_larga = 'max' * 201
+        self.data['descripcion'] = descripcion_larga
+        form = FormPropiedad(data=self.data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('descripcion', form.errors)
