@@ -8,7 +8,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton Agregar Reseña
     Y escribe en la descripción "100% recomendado"
@@ -20,7 +20,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton Agregar Reseña
     Y escribe en la descripción "Me hospede en esta propiedad un año, y el trato y servicios fuerón excepcionales, 100% recomendado"
@@ -33,7 +33,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Cuando presiona el boton Reseñas de la propiedad
     Entonces ve en la pagina "Ya has insertado una reseña" 
 
@@ -42,7 +42,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Venustiano Carranza 25, Ayuntamiento, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Loma Bonita 23, Lomas de Bernárdez Sección Plata, Guadalupe"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton Agregar Reseña
     Y selecciona como calificación "4" estrellas
@@ -54,7 +54,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Venustiano Carranza 25, Ayuntamiento, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Loma Bonita 23, Lomas de Bernárdez Sección Plata, Guadalupe"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton Agregar Reseña
     Y escribe en la descripción "100% recomendado"

@@ -8,7 +8,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton de Editar reseña
     Y modifica la descripción con el texto "Me hospede en esta propiedad un año, y el trato y servicios fuerón excepcionales, 100% recomendado, Un saludo al ingeniero"
@@ -20,7 +20,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton de Editar reseña
     Y modifica la calificación asignando "3" estrellas a la reseña
@@ -32,7 +32,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton de Editar reseña
     Y modifica la descripción dejandola vacia
@@ -44,7 +44,7 @@ Característica: Crear reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton de Editar Reseña
     Cuando presiona el boton de Cancelar

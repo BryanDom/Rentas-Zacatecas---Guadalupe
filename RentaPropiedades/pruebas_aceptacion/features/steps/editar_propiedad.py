@@ -13,7 +13,7 @@ def step_impl(context):
 
 
 @given(u'actualiza el precio "{precio}"')
-def step_impl(context, precio):
+def step_impl(context, precio):  # noqa: F811
     nuevo_precio = context.driver.find_element(By.ID, 'id_precio')
     # Limpia el campo
     nuevo_precio.clear()
@@ -23,7 +23,7 @@ def step_impl(context, precio):
 
 
 @given(u'actualiza el tipo de propiedad a "{tipo_prop}"')
-def step_impl(context, tipo_prop):
+def step_impl(context, tipo_prop):  # noqa: F811
     time.sleep(1)
     tipo = context.driver.find_element(By.ID, 'id_tipo')
     select = Select(tipo)
@@ -31,7 +31,7 @@ def step_impl(context, tipo_prop):
 
 
 @given(u'selecciona otra imagen de la propiedad "{nueva_img}"')
-def step_impl(context, nueva_img):
+def step_impl(context, nueva_img):  # noqa: F811
     time.sleep(1)
     ruta_imagen = os.path.join(BASE_DIR, nueva_img.replace("\\", os.sep))
     # Encontrar el elemento de entrada de archivo
@@ -48,19 +48,19 @@ def step_impl(context, nueva_img):
 
 
 @when(u'presiona en el botón Guardar cambios')
-def step_impl(context):
+def step_impl(context):  # noqa: F811
     time.sleep(1)
     context.driver.find_element(By.ID, "btn-guardar").click()
 
 
 @then(u'puede ver el tipo de propiedad "{tipo_prop}" cambiado.')
-def step_impl(context, tipo_prop):
+def step_impl(context, tipo_prop):  # noqa: F811
     tipo = context.driver.find_element(By.XPATH, '//*[@id="tipo_prop"]').text
     assert tipo == tipo_prop, f"{tipo} no es {tipo_prop}"
 
 
 @then(u'puede ver el mensaje siguiente "{mensaje}" en el campo del precio.')
-def step_impl(context, mensaje):
+def step_impl(context, mensaje):  # noqa: F811
     is_valid = (
         context.driver.find_element(By.ID, 'id_precio')
         .get_attribute('validationMessage')

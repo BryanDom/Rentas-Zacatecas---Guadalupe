@@ -8,7 +8,7 @@ Característica: Eliminar reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton de Eliminar reseña
     Cuando presiona el boton de Cancelar
@@ -19,7 +19,7 @@ Característica: Eliminar reseña
     Y escribe su correo "elliotnoriega@gmail.com" y su contraseña "elliot@21" 
     Y presiona el botón de Log in
     Y presiona el botón de lista de propiedades
-    Y presiona el boton detalles de la propiedad "Del Angel 12, Centro Sct Zacatecas, Zacatecas"
+    Y presiona el boton detalles de la propiedad "Villa bonita 2, Colinas Del Padre, Zacatecas"
     Y presiona el boton Reseñas de la propiedad
     Y presiona el boton de Eliminar reseña
     Cuando presiona el boton de eliminar confirmando su eliminación
