@@ -208,7 +208,8 @@ class TestFormResena(TestCase):
         self.data['descripcion'] = ''
         form = FormResena(data=self.data)
         self.assertFalse(form.is_valid())
-        # Verifica que el error de 'descripcion' 
+        # Verifica que el error de
+        # 'descripcion'
         # está presente en los errores del formulario
         self.assertIn('descripcion', form.errors)
 
@@ -235,7 +236,8 @@ class TestFormResena(TestCase):
         self.data['calificacion'] = 6
         form = FormResena(data=self.data)
         self.assertFalse(form.is_valid())
-        # Verifica que el error de 'calificacion' está presente en los errores del formulario
+        # Verifica que el error de 'calificacion'
+        # está presente en los errores del formulario
         self.assertIn('calificacion', form.errors)
 
     def test_formulario_valido(self):

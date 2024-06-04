@@ -88,7 +88,9 @@ def nueva_propiedad(request):
                 # Ahora guardamos con la ubicación actualizada
 
                 for i, form_imagen in enumerate(form_imagenes):
-                    if request.FILES.get(form_imagen.add_prefix('imagen')):# pragma: no cover
+                    if request.FILES.get(
+                        form_imagen.add_prefix('imagen')
+                    ):  # pragma: no cover
                         imagen_propiedad = form_imagen.save(commit=False)
                         imagen_propiedad.propiedad = propiedad
                         imagen_propiedad.save()
@@ -209,19 +211,19 @@ def editarPropiedad(request, id):
                 propiedad.save()
 
                 # Crea una instancia con la nueva imagen si se proporciona
-                if 'imagen' in request.FILES:# pragma: no cover
+                if 'imagen' in request.FILES:  # pragma: no cover
                     ImagenPropiedad.objects.create(
                         propiedad=propiedad, imagen=request.FILES['imagen'])
 
                 return redirect('propiedades_arrendador')
-        else:# pragma: no cover
+        else:  # pragma: no cover
             form = FormPropiedad(instance=propiedad)
             imagenes_propiedad = ImagenPropiedad.objects.filter(
                 propiedad=propiedad)
             context = {'form': form, 'id': id,
                        'imagenes_propiedad': imagenes_propiedad}
             return render(request, 'editar_propiedad.html', context)
-    else:# pragma: no cover
+    else:  # pragma: no cover
         mensaje = "Acción no permitida."
         propiedades = Propiedad.objects.filter(
             arrendador=request.user.arrendador)
@@ -295,7 +297,7 @@ def confirmarEliminacionPropiedad(request, id):
 
             if primer_imagen is not None:
                 propiedad.primerImagen = primer_imagen.imagen.url
-            else:# pragma: no cover
+            else:  # pragma: no cover
                 propiedad.primerImagen = ''
                 # Puedes definir un valor por defecto si no hay imagen
 
@@ -320,7 +322,7 @@ def eliminarPropiedad(request, id):
         propiedad.delete()
 
         return redirect('propiedades_arrendador')
-    else:# pragma: no cover
+    else:  # pragma: no cover
         mensaje = "Acción no permitida."
         propiedades = Propiedad.objects.filter(
             arrendador=request.user.arrendador)
@@ -406,7 +408,7 @@ def eliminarDeListaFavorito(request, propiedad_id):
     if favorito:
         favorito.delete()
         messages.success(request, f"Se eliminó la propiedad: {propiedad_id}")
-    else:# pragma: no cover
+    else:  # pragma: no cover
         messages.warning(
             request, "El favorito no existe o no pertenece al estudiante")
 

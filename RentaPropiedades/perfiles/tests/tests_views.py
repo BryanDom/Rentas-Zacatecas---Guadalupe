@@ -1,10 +1,9 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User, Group
 from perfiles.models import Arrendador, Estudiante
-from Propiedades.models import Propiedad, ImagenPropiedad, Resena, Favorito, Estudiante_Interesado, Colonia, Municipio
-from perfiles.forms import FormArrendador, FormEstudiante
-from Propiedades.forms import FormImagenPropiedad
+from Propiedades.models import (Propiedad, ImagenPropiedad, Resena, Favorito,
+                                Estudiante_Interesado, Colonia, Municipio)
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
@@ -394,8 +393,8 @@ class ArrendadorTests(TestCase):
         self.assertEqual(self.arrendador.edad, 41)
 
     def test_eliminar_arrendador(self):
-        response = self.client.get(reverse('eliminar_arrendador'))
-        response = self.client.post(
+        self.client.get(reverse('eliminar_arrendador'))
+        self.client.post(
             reverse('confirmar_eliminacion_arrendador'))
         with self.assertRaises(Arrendador.DoesNotExist):
             Arrendador.objects.get(id=self.arrendador.id)
@@ -450,7 +449,8 @@ class EstudianteTests(TestCase):
             'preferencias_busqueda': 'Cuartos de estudiantes',
             'pasatiempos': 'Música, pintura, películas de terror.',
             'sexo': 'M',
-            'foto_perfil': 'perfiles/1144760.png'  # Ruta de la imagen de perfil
+            # Ruta de la imagen de perfil
+            'foto_perfil': 'perfiles/1144760.png'
         }
         response = self.client.post(reverse('editar_perfil_estudiante'), data)
         self.assertEqual(response.status_code, 302)
@@ -574,7 +574,8 @@ class ResenaCreateViewTests(TestCase):
         # # Imprimir el contenido HTML de la respuesta
         # print(response.content.decode('utf-8'))
 
-        # Verificar que el mensaje "Ya has insertado una reseña" está presente en el cuerpo de la respuesta
+        # Verificar que el mensaje "Ya has insertado una reseña"
+        # está presente en el cuerpo de la respuesta
         self.assertContains(
             response, '<h2>Ya has insertado una reseña:</h2>', html=True)
 
@@ -863,10 +864,12 @@ class LoginViewTests(TestCase):
         # Verificar que el mensaje de error se muestra
         self.assertContains(response, 'Contraseña incorrecta :(')
 
-        # Verificar que el usuario no está autenticado (no hay ID de usuario en la sesión)
+        # Verificar que el usuario no está autenticado
+        # (no hay ID de usuario en la sesión)
         self.assertNotIn('_auth_user_id', self.client.session)
 
-        # Verificar que el ID de usuario no se guarda en la sesión personalizada
+        # Verificar que el ID de usuario no se guarda en la sesión
+        # personalizada
         self.assertNotIn('user_id', self.client.session)
 
         # Verificar que el bloque else se ejecuta
@@ -1034,8 +1037,11 @@ class PropiedadCreateViewTests(TestCase):
             descripcion='Test Propiedad').exists())
 
     def test_nueva_propiedad_post_duplicate(self):
-        Propiedad.objects.create(descripcion='Test Propiedad', precio=1000, tipo=1,
-                                 ubicacion='Test Street 123, Test Colonia, Test Municipio', arrendador=self.arrendador)
+        Propiedad.objects.create(
+            descripcion='Test Propiedad',
+            precio=1000, tipo=1,
+            ubicacion='Test Street 123, Test Colonia, Test Municipio',
+            arrendador=self.arrendador)
         data = {
             'descripcion': 'Test Propiedad',
             'precio': 1000,
@@ -1052,48 +1058,6 @@ class PropiedadCreateViewTests(TestCase):
             response, "Error: La propiedad ya está registrada.")
         self.assertFalse(Propiedad.objects.filter(
             descripcion='Test Propiedad').count() > 1)
-
-    # def test_nueva_propiedad_post_with_images(self):
-    #     #Propiedad.objects.create(descripcion='Test Propiedad', precio=1000, tipo=1, ubicacion='Test Street 123, Test Colonia, Test Municipio', arrendador=self.arrendador)
-
-    #     # Crear archivos de imagen simulados
-    #     image_data = b'Fake image data'
-    #     images = [SimpleUploadedFile(f'test_image_{i}.jpg', image_data, content_type='image/jpeg') for i in range(2)]  # Crear dos imágenes simuladas
-
-    #     # Adjuntar las imágenes al formulario de imágenes
-    #     form_imagenes = [FormImagenPropiedad(
-    #         {'imagen': image},
-    #         prefix=f'imagen_{i}'
-    #     ) for i, image in enumerate(images)]
-
-    #     # Datos del formulario de propiedad
-    #     data = {
-    #         'descripcion': 'Test Propiedad',
-    #         'precio': 1000,
-    #         'tipo': 1,
-    #         'calle': 'Test Street',
-    #         'numero': '123',
-    #         'colonia': self.colonia,
-    #         'municipio': self.municipio.id  # Corregir el acceso al ID del municipio
-    #     }
-
-    #     # Unir los datos del formulario de propiedad con los archivos de imagen
-    #     data.update({f'imagen_{i}': image for i, image in enumerate(images)})
-
-    #     # Realizar la solicitud POST con los datos y las imágenes
-    #     response = self.client.post(reverse('agregar_propiedad'), data, format='multipart')
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'confirmacion_propiedad.html')
-    #     self.assertTrue(Propiedad.objects.filter(descripcion='Test Propiedad').exists())
-
-    #     # Verificar que las imágenes se han guardado correctamente
-    #     propiedad = Propiedad.objects.get(descripcion='Test Propiedad')
-    #     imagenes_propiedad = ImagenPropiedad.objects.filter(propiedad=propiedad)
-    #     self.assertEqual(len(imagenes_propiedad), 2)  # Verificar que se hayan guardado dos imágenes
-
-    #     # Verificar que la primera imagen sea la correcta
-    #     primera_imagen = imagenes_propiedad[0]
-    #     self.assertTrue(primera_imagen.imagen.name.endswith('test_image_0.jpg'))  # Verificar el nombre de la primera imagen
 
 
 class InteresadosTest(TestCase):
@@ -1432,24 +1396,29 @@ class ConfirmarEliminacionFavoritoTests(TestCase):
         self.client.login(username='joseguardado@gmail.com',
                           password='testpassword')
 
-        # Crear un favorito adecuando los parámetros a la definición real del modelo
+        # Crear un favorito adecuando los parámetros a la
+        # definición real del modelo
         self.favorito = Favorito.objects.create(
             propiedad=self.propiedad1,
-            estudiante=self.estudiante  # Cambio aquí: uso de 'estudiante' en lugar de 'usuario'
+            estudiante=self.estudiante
         )
 
     def test_confirmacion_eliminacion_favorito(self):
         response = self.client.get(
-            reverse('confirmar_eliminacion_favorito', args=[self.propiedad1.id]))
+            reverse(
+                'confirmar_eliminacion_favorito',
+                args=[self.propiedad1.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, 'confirmar_eliminacion_favorito.html')
         # Verificamos que los contextos sean correctos
-        self.assertEqual(response.context['propiedad'], self.propiedad1)
+        self.assertEqual(response.context['propiedad'],
+                         self.propiedad1)
         self.assertIn(self.favorito, response.context['favoritos'])
 
     def test_propiedad_no_existe(self):
-        # Proporciona un ID de propiedad que no existe para probar la página 404
+        # Proporciona un ID de propiedad
+        # que no existe para probar la página 404
         response = self.client.get(
             reverse('confirmar_eliminacion_favorito', args=[999]))
         self.assertEqual(response.status_code, 404)
@@ -1521,44 +1490,57 @@ class FavoritosViewTests(TestCase):
                           password='testpassword')
 
     def test_agregar_propiedad_favoritos(self):
-        # Realizar una solicitud POST para agregar la propiedad a la lista de favoritos
+        # Realizar una solicitud POST para agregar
+        # la propiedad a la lista de favoritos
         response = self.client.post(
-            reverse('agregaraListaFavoritos', args=[self.propiedad.id]))
+            reverse('agregaraListaFavoritos',
+                    args=[self.propiedad.id]))
 
-        # Verificar que la solicitud se haya realizado con éxito (código de estado HTTP 302)
+        # Verificar que la solicitud se haya realizado
+        # con éxito (código de estado HTTP 302)
         self.assertEqual(response.status_code, 302)
 
-        # Verificar que se ha creado un objeto Favorito en la base de datos
+        # Verificar que se ha creado un objeto Favorito
+        # en la base de datos
         self.assertEqual(Favorito.objects.count(), 1)
 
     def test_ver_lista_favoritos(self):
         # Agregar la propiedad a la lista de favoritos
         self.client.post(
-            reverse('agregaraListaFavoritos', args=[self.propiedad.id]))
+            reverse('agregaraListaFavoritos',
+                    args=[self.propiedad.id]))
 
-        # Realizar una solicitud GET para ver la lista de favoritos
+        # Realizar una solicitud GET para ver la
+        # lista de favoritos
         response = self.client.get(
             reverse('lista_favoritos'))  # Corrección aquí
 
-        # Verificar que la solicitud se haya realizado con éxito (código de estado HTTP 200)
+        # Verificar que la solicitud se haya realizado con
+        # éxito (código de estado HTTP 200)
         self.assertEqual(response.status_code, 200)
 
-        # Verificar que la propiedad agregada está en la lista de favoritos
+        # Verificar que la propiedad agregada está en
+        # la lista de favoritos
         self.assertContains(response, self.propiedad.ubicacion)
 
     def test_eliminar_propiedad_favoritos(self):
         # Agregar la propiedad a la lista de favoritos
         self.client.post(
-            reverse('agregaraListaFavoritos', args=[self.propiedad.id]))
+            reverse('agregaraListaFavoritos',
+                    args=[self.propiedad.id]))
 
-        # Realizar una solicitud POST para eliminar la propiedad de la lista de favoritos
+        # Realizar una solicitud POST para eliminar
+        # la propiedad de la lista de favoritos
         response = self.client.post(
-            reverse('eliminarDeListaFavoritos', args=[self.propiedad.id]))
+            reverse('eliminarDeListaFavoritos',
+                    args=[self.propiedad.id]))
 
-        # Verificar que la solicitud se haya realizado con éxito (código de estado HTTP 302)
+        # Verificar que la solicitud se haya realizado
+        # con éxito (código de estado HTTP 302)
         self.assertEqual(response.status_code, 302)
 
-        # Verificar que la propiedad ya no está en la lista de favoritos
+        # Verificar que la propiedad ya no está en
+        # la lista de favoritos
         self.assertEqual(Favorito.objects.count(), 0)
 
 
@@ -1643,14 +1625,16 @@ class EliminarPropiedadTests(TestCase):
     def test_eliminar_propiedad_sin_permiso(self):
         # Desconectar al usuario actual
         self.client.logout()
-        # Iniciar sesión con un usuario diferente que no tiene los permisos necesarios
+        # Iniciar sesión con un usuario diferente
+        # que no tiene los permisos necesarios
         self.client.login(username='joseguardado@gmail.com',
                           password='testpassword')
 
         # Intentar eliminar la propiedad
         response = self.client.post(reverse('eliminar_propiedad', args=[
                                     self.propiedad.id]), follow=True)
-        # Verifica que la solicitud fue ejecutada correctamente, pero debería haberse negado a eliminar.
+        # Verifica que la solicitud fue ejecutada
+        # correctamente, pero debería haberse negado a eliminar.
         self.assertEqual(response.status_code, 200)
 
         # Desconectar al usuario actual
@@ -1661,12 +1645,13 @@ class EliminarPropiedadTests(TestCase):
         # Verifica que la propiedad aún existe
         self.assertEqual(Propiedad.objects.count(), 1)
 
+
 class TestEliminacionPropiedad(TestCase):
 
     def setUp(self):
 
         self.group, created = Group.objects.get_or_create(name='arrendador')
-    
+
         # Crear usuario arrendador
         self.user1 = User.objects.create_user(
             username='luisperez@gmail.com',
@@ -1703,10 +1688,12 @@ class TestEliminacionPropiedad(TestCase):
         )
 
     def test_confirmacion_exitosa_eliminacion(self):
-        self.client.login(username="luisperez@gmail.com", password="testpassword")
+        self.client.login(username="luisperez@gmail.com",
+                          password="testpassword")
         # Simula una solicitud GET a la vista confirmarEliminacionPropiedad
         response = self.client.get(
-            reverse('confirmacion_eliminacion_propiedad', args=[self.propiedad.id])
+            reverse('confirmacion_eliminacion_propiedad',
+                    args=[self.propiedad.id])
         )
 
         # Verifica que la respuesta sea un éxito (código de estado 200)
@@ -1747,18 +1734,24 @@ class TestEliminacionPropiedad(TestCase):
             propiedad=self.propiedad1,
             imagen='perfiles/img.jpg'
         )
-        # Simula una solicitud GET a la vista confirmarEliminacionPropiedad con un usuario no autorizado
-        self.client.login(username="usuario_no_arrendador@gmail.com", password="password")
+        # Simula una solicitud GET a la vista
+        # confirmarEliminacionPropiedad con un usuario no autorizado
+        self.client.login(
+            username="usuario_no_arrendador@gmail.com", password="password")
         response = self.client.get(
-            reverse('confirmacion_eliminacion_propiedad', args=[self.propiedad.id])
+            reverse('confirmacion_eliminacion_propiedad',
+                    args=[self.propiedad.id])
         )
-        # Verifica que la respuesta sea un redireccionamiento (código de estado 302)
+        # Verifica que la respuesta sea un
+        # redireccionamiento (código de estado 302)
         self.assertEqual(response.status_code, 200)
+
 
 class EditarPropiedadTests(TestCase):
     def setUp(self):
-         # Crear grupo de estudiante
-        self.group_estudiante, created = Group.objects.get_or_create(name='estudiante')
+        # Crear grupo de estudiante
+        self.group_estudiante, created = Group.objects.get_or_create(
+            name='estudiante')
         # Crear usuario estudiante
         self.user = User.objects.create_user(
             username='joseguardado@gmail.com',
@@ -1779,9 +1772,10 @@ class EditarPropiedadTests(TestCase):
             sexo='M',
             foto_perfil='perfiles/1144760.png'
         )
-        
+
         # Configurando usuario y grupo de arrendador
-        self.group_arrendador, _ = Group.objects.get_or_create(name='arrendador')
+        self.group_arrendador, _ = Group.objects.get_or_create(
+            name='arrendador')
         self.user_arrendador = User.objects.create_user(
             username='luisperez@gmail.com',
             password='testpassword'
@@ -1797,7 +1791,8 @@ class EditarPropiedadTests(TestCase):
             correo='luisperez@gmail.com'
         )
 
-        self.client.login(username='luisperez@gmail.com', password='testpassword')
+        self.client.login(username='luisperez@gmail.com',
+                          password='testpassword')
 
         # Creando una propiedad asociada al arrendador
         self.propiedad = Propiedad.objects.create(
@@ -1811,8 +1806,10 @@ class EditarPropiedadTests(TestCase):
 
         # Adjuntar imagen a la propiedad
         imagen_data = b'Fake image data'
-        imagen_file = SimpleUploadedFile('test_image.jpg', imagen_data, content_type='image/jpeg')
-        ImagenPropiedad.objects.create(propiedad=self.propiedad, imagen=imagen_file)
+        imagen_file = SimpleUploadedFile(
+            'test_image.jpg', imagen_data, content_type='image/jpeg')
+        ImagenPropiedad.objects.create(
+            propiedad=self.propiedad, imagen=imagen_file)
 
     def test_editar_propiedad_con_permiso(self):
         # Datos del formulario simulando la actualización
@@ -1824,25 +1821,33 @@ class EditarPropiedadTests(TestCase):
             'serviciosIncluidos': True
         }
         response = self.client.post(
-            reverse('editar_propiedad', args=[self.propiedad.id]), 
+            reverse('editar_propiedad', args=[self.propiedad.id]),
             form_data
         )
         self.assertRedirects(response, reverse('propiedades_arrendador'))
 
         # Verifica que la propiedad se haya actualizado correctamente
         self.propiedad.refresh_from_db()
-        self.assertEqual(self.propiedad.descripcion, "Actualizada casa de campo")
+        self.assertEqual(self.propiedad.descripcion,
+                         "Actualizada casa de campo")
         self.assertEqual(self.propiedad.precio, 2500)
 
     def test_editar_propiedad_sin_permiso(self):
         # Asegura que el usuario está desconectado primero
         self.client.logout()
-        # Autenticar un usuario que definitivamente no tiene los permisos de arrendador
-        self.client.login(username='joseguardado@gmail.com', password='testpassword')
+        # Autenticar un usuario que definitivamente no
+        # tiene los permisos de arrendador
+        self.client.login(username='joseguardado@gmail.com',
+                          password='testpassword')
 
         # Intentar editar la propiedad
         form_data = {
             'descripcion': 'Intento fallido de actualización',
             'precio': 2100
         }
-        response = self.client.post(reverse('editar_propiedad', args=[self.propiedad.id]), form_data, follow=True)
+        self.client.post(
+            reverse('editar_propiedad',
+                    args=[
+                        self.propiedad.id]),
+            form_data,
+            follow=True)
