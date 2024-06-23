@@ -2,11 +2,10 @@
 
 # Autores del proyecto
 
+- Brayan Domínguez Saucedo
 - Narda Viktoria Gómez Aguilera
 - Adalberto Cerrillo Vázquez
-- Brayan Domínguez Saucedo
 - Elliot Axel Noriega 
-- Hector Abraham Gonzáles Durán (Software Tester)
 
 # Descripción del proyecto
 
